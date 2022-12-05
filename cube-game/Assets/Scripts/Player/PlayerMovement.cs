@@ -23,10 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Rotate();
         Move();
     }
-
 
     void OnMoveInput(InputValue value)
     {
@@ -35,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJumpInput()
     {
-        if (Utils.IsGrounded(this.transform.position))
+        if (Utils.IsGrounded(playerRigidbody.transform.position))
         {
             Jump();
         }
@@ -43,17 +41,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 moveDistance =
-            moveInputValue.y * transform.forward * moveSpeed * Time.deltaTime;
-        playerRigidbody.MovePosition(playerRigidbody.position + moveDistance);
-    }
-
-    private void Rotate()
-    {
-        float turn = moveInputValue.x * rotateSpeed * Time.deltaTime;
-
-        playerRigidbody.rotation =
-            playerRigidbody.rotation * Quaternion.Euler(0, turn, 0f);
+        Vector3 moveVector = playerRigidbody.transform.forward * moveInputValue.y;
+        moveVector += Quaternion.Euler(0, 90f, 0f) * playerRigidbody.transform.forward * moveInputValue.x;
+        playerRigidbody.MovePosition(playerRigidbody.position + moveVector * moveSpeed * Time.deltaTime);
     }
 
     private void Jump()
