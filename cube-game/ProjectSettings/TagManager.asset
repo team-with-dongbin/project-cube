@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Cube
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Player
   - Field
-  - 
+  - Item
   - 
   - 
   - 
