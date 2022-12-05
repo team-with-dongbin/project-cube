@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float rotateSpeed = 180f;
     public float moveSpeed = 4f;
-    public float jumpForce = 2f;
+    public float jumpForce = 3f;
 
     Vector2 moveInputValue = Vector2.zero;
 
