@@ -43,7 +43,7 @@ Shader "Custom/CubeShader"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Albedo = lerp(_Color, _EdgeColor, c.r);
+            o.Albedo = lerp(_EdgeColor, _Color, c.r);
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
