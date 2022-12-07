@@ -39,7 +39,6 @@ public class Cube : Item, IDamageable{
     private void Destruction(){
         audioSource.clip = destroySound;
         audioSource.Play();
-        SpreadItem();
-        //Destroy(cube,destroySound.length);
+        Drop();
     }
 }
