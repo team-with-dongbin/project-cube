@@ -1,24 +1,16 @@
 using System;
 using UnityEngine;
 
-public class Cube : MonoBehaviour, IDamageable{
+public class Cube : Item, IDamageable{
 
-    [SerializeField]
-    public float hp = 100f;
-
-    [SerializeField]
-    private BoxCollider boxCollider;
-
-
+    private float hp = 100f;
     [SerializeField]
     private GameObject cube;
-    //[SerializeField]
-    //private GameObject cubeItemPrefab;
 
     [SerializeField]
-    private string strikeSound;
+    private AudioClip strikeSound,destroySound;
     [SerializeField]
-    private string destroySound;
+    private AudioSource audioSource;
 
 
 
@@ -31,21 +23,23 @@ public class Cube : MonoBehaviour, IDamageable{
         type = (Type)UnityEngine.Random.Range(0, (int)Type.Size);
         this.GetComponent<Renderer>().material.SetColor("_Color", c[(int)type]);
         //this.GetComponent<Renderer>().material.SetColor("_EdgeColor", Color.black);
-        OnDamage((float)1111.0, Vector3.zero, Vector3.zero);
+        OnDamage((float)150.0, Vector3.zero, Vector3.zero);
     }
 
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal) {
         hp -= damage;
         if (hp <= 0)
             Destruction();
-        else
-            SoundManager.instance.PlaySE(strikeSound);
+        else{
+            audioSource.clip = strikeSound;
+            audioSource.Play();
+        }
     }
 
     private void Destruction(){
-        SoundManager.instance.PlaySE(destroySound);
-        boxCollider.enabled = false;
-        //Instantiate(cubeItemPrefab, cube.transform.position, Quaternion.identity);
-        Destroy(cube);
+        audioSource.clip = destroySound;
+        audioSource.Play();
+        SpreadItem();
+        //Destroy(cube,destroySound.length);
     }
 }

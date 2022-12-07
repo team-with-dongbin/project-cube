@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "New Item/item")]
-public class Item : ScriptableObject
-{
-    public string itemName;
-    public ItemType itemType;
-    public Sprite itemImage;
-    public GameObject itemPrefab;
-
+public class Item : MonoBehaviour{
+    private bool IsSpread = false;
     public enum ItemType
     {
-        Equipment, Cube, Gun, Knife
+        Equipment, Cube, Gun, Knife, potion, size
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Update(){
+        if(IsSpread)
+            transform.Rotate(Vector3.up * 100 * Time.deltaTime);
+    }
+
+    public void UpdateStat()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SpreadItem() {
+        Transform transform = GetComponent<Transform>();
+        transform.localScale /= 3;
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        boxCollider.size *=2;
+        UpdateStat();
+        IsSpread = true;
+        GetComponent<Rigidbody>().constraints =
+            RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 }
