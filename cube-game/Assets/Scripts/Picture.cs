@@ -17,6 +17,8 @@ public class Picture : MonoBehaviour
                 Color c = picture[i, j].GetComponent<Renderer>().material.color;
                 c.a = 0.3f;
                 picture[i, j].GetComponent<Renderer>().material.color = c;
+                picture[i, j].transform.SetParent(this.transform);
+                picture[i, j].name = new string("Picture (" + i + "," + j + ")");
             }
     }
 
