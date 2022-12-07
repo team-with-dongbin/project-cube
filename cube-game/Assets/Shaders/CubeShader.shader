@@ -2,10 +2,10 @@ Shader "Custom/CubeShader"
 {
     Properties
     {
-        _Color ("Color", Color) = (1,1,1,1)
+        _Color ("Color", Color) = (0,0,0,1)
         _EdgeColor("EdgeColor", Color) = (0,0,0,0)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Glossiness ("Smoothness", Range(0,1)) = 0.5
+        _Glossiness ("Smoothness", Range(0,1)) = 0.0
         _Metallic ("Metallic", Range(0,1)) = 0.0
     }
     SubShader
@@ -43,7 +43,7 @@ Shader "Custom/CubeShader"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            o.Albedo = lerp(_EdgeColor, _Color, c.r);
+            o.Albedo = lerp(_Color, _EdgeColor, c.r);
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
