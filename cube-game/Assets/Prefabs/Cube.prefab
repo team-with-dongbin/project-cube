@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3265224274490506788}
   - component: {fileID: 6834107997195271808}
   - component: {fileID: 7170437114186470499}
-  - component: {fileID: 3892084407855079685}
   - component: {fileID: 6785920715383931431}
   m_Layer: 9
   m_Name: Cube
@@ -130,24 +129,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cube: {fileID: 1968355531193105197}
-  cubeItemPrefab: {fileID: 0}
   strikeSound: {fileID: 8300000, guid: 9703ee282f0a19348b1b645c715aac53, type: 3}
   destroySound: {fileID: 8300000, guid: 2453695ab9984c445a8068b57289ef0d, type: 3}
   audioSource: {fileID: 6785920715383931431}
   type: 0
---- !u!114 &3892084407855079685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968355531193105197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80b1361bcf8f444409224c3101200b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: f84f051a70502af468362a2ebd9e21cf, type: 2}
 --- !u!82 &6785920715383931431
 AudioSource:
   m_ObjectHideFlags: 0

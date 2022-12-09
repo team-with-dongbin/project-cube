@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2764199227076940922}
   - component: {fileID: 7819692409305949088}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Picture
-  m_TagString: Untagged
+  m_TagString: Cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
