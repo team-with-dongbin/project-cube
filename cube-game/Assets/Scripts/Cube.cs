@@ -23,7 +23,7 @@ public class Cube : Item, IDamageable{
         type = (Type)UnityEngine.Random.Range(0, (int)Type.Size);
         this.GetComponent<Renderer>().material.SetColor("_Color", c[(int)type]);
         //this.GetComponent<Renderer>().material.SetColor("_EdgeColor", Color.black);
-        OnDamage((float)150.0, Vector3.zero, Vector3.zero);
+        OnDamage((float)50.0, Vector3.zero, Vector3.zero);
     }
 
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal) {
