@@ -27,12 +27,13 @@ public class Picture : MonoBehaviour
                 picture[i, j] = Instantiate(Cube, picturePos + new Vector3(i - 2, 1, j - 2), Quaternion.identity);
                 picture[i, j].transform.SetParent(this.transform);
                 picture[i, j].name = new string("Picture (" + i + "," + j + ")");
+
             }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+    
     }
 }
