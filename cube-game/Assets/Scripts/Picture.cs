@@ -4,27 +4,35 @@ using UnityEngine;
 
 public class Picture : MonoBehaviour
 {
-    private static int pictureSize = 5;
+    [SerializeField]
+    private GameObject Cube;
+
+    public static int pictureSize = 5;
     private GameObject[,] picture = new GameObject[pictureSize, pictureSize];
-    public GameObject Cube;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < pictureSize; i++)
-            for(int j = 0; j < pictureSize; j++)
+        Vector3 picturePos = this.transform.position;
+
+        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        floor.transform.position = picturePos;
+        floor.transform.localScale = new Vector3(pictureSize + 2, 1, pictureSize + 2);
+        floor.transform.SetParent(this.transform);
+        floor.name = new string("floor");
+
+        for (int i = 0; i < pictureSize; i++)
+            for (int j = 0; j < pictureSize; j++)
             {
-                Vector3 pos = this.transform.position;
-                picture[i, j] = Instantiate(Cube, pos + new Vector3(i, j, 0), Quaternion.identity);
-                Color c = picture[i, j].GetComponent<Renderer>().material.color;
-                c.a = 0.3f;
-                picture[i, j].GetComponent<Renderer>().material.color = c;
+                picture[i, j] = Instantiate(Cube, picturePos + new Vector3(i - 2, 1, j - 2), Quaternion.identity);
+                picture[i, j].transform.SetParent(this.transform);
+                picture[i, j].name = new string("Picture (" + i + "," + j + ")");
             }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
