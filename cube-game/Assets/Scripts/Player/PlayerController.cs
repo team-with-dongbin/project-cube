@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     internal void Jump()
     {
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        animationController.Jump();
     }
 
     internal void ChangeCameraViewToFirst()

@@ -19,6 +19,11 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    public void Jump()
+    {
+        animator.CrossFadeInFixedTime("Jump", 0.1f);
+    }
+
     public void SetMoveVector(Vector2 moveInputVector)
     {
         if (moveInputVector.magnitude > 1.01f)
