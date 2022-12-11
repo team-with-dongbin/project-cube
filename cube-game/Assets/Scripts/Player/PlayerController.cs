@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     internal float mouseXDelta = 0f;
     internal float mouseYDelta = 0f;
 
-    float XRotationOfHead = 0f;
-
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;

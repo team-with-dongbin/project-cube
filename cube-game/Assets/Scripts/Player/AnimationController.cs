@@ -19,6 +19,11 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        animator.CrossFadeInFixedTime("SwordSlash", 0.1f);
+    }
+
     public void Jump()
     {
         animator.CrossFadeInFixedTime("Jump", 0.1f);
