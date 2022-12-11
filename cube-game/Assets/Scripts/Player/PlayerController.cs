@@ -8,13 +8,13 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
 
     [SerializeField]
-    Animator animator;
+    AnimationController animationController;
 
     [SerializeField]
     CameraController cameraController;
 
     public float moveSpeed = 4f;
-    internal Vector3 moveDirection = Vector3.zero;
+    internal Vector2 moveDirection = Vector2.zero;
 
     public float sprintSppedRatio = 1.5f;
     internal bool isSprinting = false;
@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody = GetComponent<Rigidbody>();
         }
-        if (animator == null)
+        if (animationController == null)
         {
-            animator = GetComponent<Animator>();
+            animationController = GetComponent<AnimationController>();
         }
         if (cameraController == null)
         {
@@ -56,9 +56,17 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        Vector3 moveVector = rigidBody.transform.forward * moveDirection.z;
-        moveVector += Quaternion.Euler(0, 90f, 0f) * rigidBody.transform.forward * moveDirection.x;
+        Vector2 inputVector = moveDirection;
+        if (isSprinting)
+        {
+            inputVector *= sprintSppedRatio;
+        }
+
+        Vector3 moveVector = rigidBody.transform.forward * inputVector.y;
+        moveVector += Quaternion.Euler(0, 90f, 0f) * rigidBody.transform.forward * inputVector.x;
+
         rigidBody.MovePosition(rigidBody.position + moveVector * moveSpeed * Time.deltaTime);
+        animationController.SetMoveVector(inputVector);
     }
 
     void Rotate()
