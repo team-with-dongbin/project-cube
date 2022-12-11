@@ -27,9 +27,7 @@ public class InputController : MonoBehaviour
 
     void OnMoveInput(InputValue value)
     {
-        Vector2 input = value.Get<Vector2>();
-        playerController.moveDirection.x = input.x;
-        playerController.moveDirection.z = input.y;
+        playerController.moveDirection = value.Get<Vector2>();
     }
 
     void OnJumpInput()
@@ -46,6 +44,10 @@ public class InputController : MonoBehaviour
         if (input > 0.5f)
         {
             playerController.isSprinting = true;
+        }
+        else
+        {
+            playerController.isSprinting = false;
         }
     }
 
