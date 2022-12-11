@@ -22,6 +22,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SprintInput",
+                    "type": "Value",
+                    "id": "d6bc775a-875b-4a49-a180-680a6ce24037",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "FirstViewCameraInput",
+                    "type": "Button",
+                    "id": "5804d34b-12b4-4e8b-a81d-4778b99b62ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ThirdViewCameraInput",
+                    "type": "Button",
+                    "id": "0ad12b5d-156f-4a24-83ba-76ae0b3ede80",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -141,8 +168,41 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PC;Mobile",
+                    "groups": "PC",
                     "action": "JumpInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d567058d-360f-4ba7-863a-1a402ad7a67f",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "SprintInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "502d8497-c3ab-4559-936d-bfa6f0dc2ad3",
+                    "path": "<Keyboard>/f10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "FirstViewCameraInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "816bc84c-dd87-46a8-8f62-bb0a72250d03",
+                    "path": "<Keyboard>/f11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ThirdViewCameraInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
