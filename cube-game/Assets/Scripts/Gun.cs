@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-// 총을 구현
 public class Gun : Item {
 
     public enum State { Ready,Empty,Reloading }
@@ -10,7 +9,6 @@ public class Gun : Item {
     private AudioSource audioSource;
     public GunData gunData;
 
-    private float range = 50f;
     public int ammoRemain = 100; // 남은 전체 탄알
     public int magAmmo; // 현재 탄알집에 남아 있는 탄알
 
@@ -25,7 +23,14 @@ public class Gun : Item {
         lastFireTime = 0;
     }
 
-    private void OnEnable() {
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            Fire();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+            Reload();
     }
 
     // 발사 시도
@@ -39,7 +44,8 @@ public class Gun : Item {
     // 실제 발사 처리
     private void Shot() {
         GameObject instantBullet = Instantiate(gunData.bullet, fireTransform.position, fireTransform.rotation);
-        
+        instantBullet.GetComponent<Bullet>().ValueSetting(gunData.damage,gunData.bulletSpeed);
+
         audioSource.PlayOneShot(gunData.shotClip);
         magAmmo--;
         if (magAmmo <= 0)
