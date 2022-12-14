@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour{
-    private bool dropped = false;
+    protected bool dropped = false;
     public enum ItemType
     {
         Equipment, Cube, Gun, Knife, potion, size
@@ -24,7 +24,9 @@ public class Item : MonoBehaviour{
         transform.localScale /= 3;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         boxCollider.size *=2;
+        boxCollider.enabled = false;
         UpdateStat();
+        //플레이어가 획득할때 다시 풀어줘야함.
         dropped = true;
         GetComponent<Rigidbody>().constraints =
             RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;

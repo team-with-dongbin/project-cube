@@ -5,7 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - BGM: {instanceID: 0}
-  - BGMClip: {fileID: 8300000, guid: d3e7dd4a724d30d4b841c0fb86bb3368, type: 3}
+  - BGMClip: {fileID: 8300000, guid: 4f5155da350ef25498bc49142f676ba6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

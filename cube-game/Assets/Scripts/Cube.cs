@@ -21,16 +21,19 @@ public class Cube : Item, IDamageable{
 
     public void OnEnable() {
         type = (Type)UnityEngine.Random.Range(0, (int)Type.Size);
-        this.GetComponent<Renderer>().material.SetColor("_Color", c[(int)type]);
+        GetComponent<Renderer>().material.SetColor("_Color", c[(int)type]);
         //this.GetComponent<Renderer>().material.SetColor("_EdgeColor", Color.black);
-        OnDamage((float)50.0, Vector3.zero, Vector3.zero);
     }
 
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal) {
         hp -= damage;
         if (hp <= 0)
-            Destruction();
-        else{
+        {
+            if(!dropped)
+                Destruction();
+        }
+        else
+        {
             audioSource.clip = strikeSound;
             audioSource.Play();
         }
