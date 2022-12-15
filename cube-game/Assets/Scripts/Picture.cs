@@ -19,15 +19,12 @@ public class Picture : MonoBehaviour
         floor.transform.position = picturePos;
         floor.transform.localScale = new Vector3(pictureSize + 2, 1, pictureSize + 2);
         floor.transform.SetParent(this.transform);
-        floor.name = new string("floor");
 
         for (int i = 0; i < pictureSize; i++)
             for (int j = 0; j < pictureSize; j++)
             {
                 picture[i, j] = Instantiate(Cube, picturePos + new Vector3(i - 2, 1, j - 2), Quaternion.identity);
                 picture[i, j].transform.SetParent(this.transform);
-                picture[i, j].name = new string("Picture (" + i + "," + j + ")");
-
             }
     }
 
