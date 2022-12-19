@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Gun : Item {
-
-    public enum State { Ready,Empty,Reloading }
+public class Gun : Weapon, IReloadable
+{
+    public enum State { Ready, Empty, Reloading }
     private State state;
     public Transform fireTransform; // 탄알이 발사될 위치
     private AudioSource audioSource;
@@ -14,7 +14,8 @@ public class Gun : Item {
 
     private float lastFireTime; // 총을 마지막으로 발사한 시점
 
-    private void Awake() {
+    private void Awake()
+    {
         // 사용할 컴포넌트의 참조 가져오기
         audioSource = GetComponent<AudioSource>();
         ammoRemain = gunData.startAmmoRemain;
@@ -23,28 +24,41 @@ public class Gun : Item {
         lastFireTime = 0;
     }
 
+    public override void Attack(float basePower)
+    {
+        Fire(basePower);
+    }
+
+    public override CubeGame.WeaponType GetWeaponType()
+    {
+        return CubeGame.WeaponType.Pistol;
+    }
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            Fire();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-            Reload();
+        // if (Input.GetKey(KeyCode.E))
+        // {
+        //     Fire();
+        // }
+        // if (Input.GetKeyDown(KeyCode.R))
+        //     Reload();
     }
 
     // 발사 시도
-    public void Fire() {
-        if(state==State.Ready && Time.time >= lastFireTime + gunData.timeBetFire){
+    public void Fire(float basePower)
+    {
+        if (state == State.Ready && Time.time >= lastFireTime + gunData.timeBetFire)
+        {
             lastFireTime = Time.time;
-            Shot();
+            Shot(basePower);
         }
     }
 
     // 실제 발사 처리
-    private void Shot() {
+    private void Shot(float basePower)
+    {
         GameObject instantBullet = Instantiate(gunData.bullet, fireTransform.position, fireTransform.rotation);
-        instantBullet.GetComponent<Bullet>().ValueSetting(gunData.damage,gunData.bulletSpeed);
+        instantBullet.GetComponent<Bullet>().ValueSetting(gunData.damage * basePower, gunData.bulletSpeed);
 
         audioSource.PlayOneShot(gunData.shotClip);
         magAmmo--;
@@ -53,15 +67,17 @@ public class Gun : Item {
     }
 
     // 재장전 시도
-    public bool Reload() {
-        if(state == State.Reloading || ammoRemain <= 0 || magAmmo >= gunData.magCapacity)
+    public bool Reload()
+    {
+        if (state == State.Reloading || ammoRemain <= 0 || magAmmo >= gunData.magCapacity)
             return false;
         StartCoroutine(ReloadRoutine());
         return true;
     }
 
     // 실제 재장전 처리를 진행
-    private IEnumerator ReloadRoutine() {
+    private IEnumerator ReloadRoutine()
+    {
         state = State.Reloading;
         audioSource.PlayOneShot(gunData.reloadClip);
 
