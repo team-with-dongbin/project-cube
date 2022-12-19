@@ -9,6 +9,15 @@ public class InputController : MonoBehaviour
     [SerializeField]
     PlayerController playerController;
 
+    [SerializeField]
+    WeaponController weaponController;
+
+    [SerializeField]
+    Weapon basicWeapon1;
+
+    [SerializeField]
+    Weapon basicWeapon2;
+
     public float mouseSensitivity = 1000F;
 
     void Start()
@@ -17,12 +26,37 @@ public class InputController : MonoBehaviour
         {
             playerController = GetComponent<PlayerController>();
         }
+        if (weaponController == null)
+        {
+            weaponController = GetComponent<WeaponController>();
+            weaponController.SetWeapon(basicWeapon1);
+        }
     }
 
     void Update()
     {
         playerController.mouseXDelta = Input.GetAxis("Mouse X") * Time.deltaTime;
         playerController.mouseYDelta = Input.GetAxis("Mouse Y") * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            weaponController.SetWeapon(basicWeapon1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            weaponController.SetWeapon(basicWeapon2);
+        }
+    }
+
+    void OnAttackInput()
+    {
+        weaponController.Attack();
+    }
+
+    void OnReloadInput()
+    {
+        weaponController.Reload();
     }
 
     void OnMoveInput(InputValue value)
