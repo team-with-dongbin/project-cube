@@ -8,15 +8,16 @@ public class Inventory : MonoBehaviour
     private GameObject inventoryPanel;
     [SerializeField]
     private GameObject Content;
-    
+    [SerializeField]
+    private GameObject Slot;
+
     private bool activeInventory = false;
-    private Slot[] slot;
-    GameObject nearObject;
+    private List<Slot> slot;
 
     void Start()
     {
-        slot = Content.GetComponentsInChildren<Slot>();
         inventoryPanel.SetActive(activeInventory);
+        slot = new List<Slot>();
     }
 
     void Update()
@@ -31,5 +32,19 @@ public class Inventory : MonoBehaviour
             activeInventory = !activeInventory;
             inventoryPanel.SetActive(activeInventory);
         }
+    }
+
+    public void AcquireItem(Item newItem)
+    {
+        for(int i = 0; i < slot.Count; i++)
+        {
+            if(slot[i].AddItem(newItem))
+                return;
+        }
+        Slot newSlot = Instantiate(Slot).GetComponent<Slot>();
+        newSlot.NewSlot(newItem);
+        slot.Add(newSlot);
+        newSlot.transform.SetParent(Content.transform);
+        newSlot.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
     }
 }
