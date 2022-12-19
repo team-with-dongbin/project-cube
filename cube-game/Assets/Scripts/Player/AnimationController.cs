@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CubeGame;
 
 public class AnimationController : MonoBehaviour
 {
     [SerializeField]
     Animator animator;
+
+    [SerializeField]
+    RuntimeAnimatorController noWeaponAnimator;
+
+    [SerializeField]
+    RuntimeAnimatorController pistolAnimator;
 
     private const float IdleMagnitude = 0f;
     private const float WalkMagnitude = 1f;
@@ -19,14 +26,34 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    public void SetWeaponType(WeaponType weaponType)
+    {
+        if (weaponType == WeaponType.NoWeapon || weaponType == WeaponType.Sword)
+        {
+            animator.runtimeAnimatorController = noWeaponAnimator;
+        }
+        else if (weaponType == WeaponType.Pistol)
+        {
+            animator.runtimeAnimatorController = pistolAnimator;
+        }
+    }
+
     public void Attack()
     {
-        animator.CrossFadeInFixedTime("SwordSlash", 0.1f);
+        animator.CrossFadeInFixedTime("Attack", 0.1f);
     }
 
     public void Jump()
     {
         animator.CrossFadeInFixedTime("Jump", 0.1f);
+    }
+
+    public void Reload()
+    {
+        if (animator.runtimeAnimatorController == pistolAnimator)
+        {
+            animator.CrossFadeInFixedTime("Reload", 0.1f);
+        }
     }
 
     public void SetMoveVector(Vector2 moveInputVector)
