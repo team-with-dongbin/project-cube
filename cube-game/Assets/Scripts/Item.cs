@@ -10,21 +10,24 @@ public class Item : MonoBehaviour{
         public string ItemName;
         public float Health, Speed, Damage, Ammo;
         public Image ItemImage;
+        public int ItemNumber;
 
-        public Data(string itemName, float health,float speed,float damage,float ammo,Image image){
+        public Data(string itemName, float health,float speed,float damage,float ammo,Image image, int itemNumber){
             ItemName = itemName;
             Health = health;
             Speed = speed;
             Damage = damage;
             Ammo = ammo;
             ItemImage = image;
+            ItemNumber = itemNumber;
         }
     }
-    protected Data data = new Data("",0, 0, 0, 0, null);
+    public Data data = new Data("",0, 0, 0, 0, null, 1000);
 
     public enum ItemType{
         Equipment, Cube, Gun, Knife, potion, size
     }
+    public ItemType itemType;
 
     public void Update(){
         if (dropped)
@@ -40,7 +43,7 @@ public class Item : MonoBehaviour{
         Transform transform = GetComponent<Transform>();
         transform.localScale /= 3;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        boxCollider.size /= 1000;
+        //boxCollider.size /= 1000;
         boxCollider.center = Vector3.down / 2;
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         gameObject.layer = LayerMask.NameToLayer("Item");
