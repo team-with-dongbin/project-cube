@@ -15,9 +15,9 @@ MonoBehaviour:
   shotClip: {fileID: 8300000, guid: 051280652806df7418ef97accbf0b4a0, type: 3}
   reloadClip: {fileID: 8300000, guid: 6e807289f24b4c548bfc5f552d931aad, type: 3}
   bullet: {fileID: 1694226804847452936, guid: 67805c01305426649acc0d3a4dfea2b2, type: 3}
-  bulletSpeed: 10
   damage: 15
-  startAmmoRemain: 60
-  magCapacity: 12
+  bulletSpeed: 10
+  startAmmoRemain: 500
+  magCapacity: 24
   timeBetFire: 0.12
   reloadTime: 1.8

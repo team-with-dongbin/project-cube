@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     CameraController cameraController;
 
+    GameObject nearObject = null;
+
     public float moveSpeed = 4f;
     internal Vector2 moveDirection = Vector2.zero;
 
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotate();
+        PickUp();
     }
 
     void Move()
@@ -87,5 +90,32 @@ public class PlayerController : MonoBehaviour
     internal void ChangeCameraViewToThird()
     {
         cameraController.ChangeCameraViewToThird();
+    }
+
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.transform.tag == "Item")
+        {
+            Debug.Log(other.tag + " ащ╠Б");
+            nearObject = other.gameObject;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Item")
+            nearObject = null;
+    }
+
+    public void PickUp()
+    {
+        if (Input.GetKeyDown(KeyCode.Z) && nearObject != null)
+            GetItem(nearObject);
+    }
+
+    private void GetItem(GameObject item){
+        item.transform.parent = transform.GetChild(3);
+        nearObject = null;
+        item.SetActive(false);
     }
 }

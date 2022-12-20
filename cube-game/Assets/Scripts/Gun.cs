@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : Item {
 
@@ -7,7 +8,10 @@ public class Gun : Item {
     private State state;
     public Transform fireTransform; // 탄알이 발사될 위치
     private AudioSource audioSource;
-    public GunData gunData;
+    [SerializeField]
+    private GunData gunData;
+    [SerializeField]
+    private Image gunImage;
 
     public int ammoRemain = 100; // 남은 전체 탄알
     public int magAmmo; // 현재 탄알집에 남아 있는 탄알
@@ -21,6 +25,8 @@ public class Gun : Item {
         magAmmo = gunData.magCapacity;
         state = State.Ready;
         lastFireTime = 0;
+        data.Damage = gunData.damage;
+        data.ItemName = "Gun";
     }
 
     private void Update()

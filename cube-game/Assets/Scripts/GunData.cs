@@ -4,8 +4,8 @@ using UnityEngine;
 public class GunData : ScriptableObject{
     public AudioClip shotClip;
     public AudioClip reloadClip;
-
     public GameObject bullet;
+
     public float damage = 0;
     public float bulletSpeed = 0;
     public int startAmmoRemain = 0; // 처음에 주어질 전체 탄약
