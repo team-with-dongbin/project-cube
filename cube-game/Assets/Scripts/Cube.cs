@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cube : Item, IDamageable{
 
@@ -11,29 +12,33 @@ public class Cube : Item, IDamageable{
     private AudioClip strikeSound,destroySound;
     [SerializeField]
     private AudioSource audioSource;
-
-
+    [SerializeField]
+    public Image cubeImage;
 
     public enum Type {Health, Speed, Damage, Ammo, Size}
     public Type type;
 
     Color[] c = { Color.red, Color.magenta, Color.yellow, Color.green };
 
-    public void OnEnable() {
+    public void Awake() {
         type = (Type)UnityEngine.Random.Range(0, (int)Type.Size);
         GetComponent<Renderer>().material.SetColor("_Color", c[(int)type]);
-        //this.GetComponent<Renderer>().material.SetColor("_EdgeColor", Color.black);
+        if (type.Equals(Type.Health)) data.Health = 3;
+        else if (type.Equals(Type.Speed)) data.Speed = 2;
+        else if (type.Equals(Type.Damage)) data.Damage = 3;
+        else if (type.Equals(Type.Ammo)) data.Ammo = 1;
+        cubeImage.color = c[(int)type];
+        data.ItemImage = cubeImage;
+        data.ItemName = "Cube";
     }
 
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal) {
         hp -= damage;
-        if (hp <= 0)
-        {
+        if (hp <= 0){
             if(!dropped)
                 Destruction();
         }
-        else
-        {
+        else{
             audioSource.clip = strikeSound;
             audioSource.Play();
         }
