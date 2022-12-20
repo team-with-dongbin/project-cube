@@ -9,15 +9,15 @@ public class Item : MonoBehaviour{
     public struct Data{
         public string ItemName;
         public float Health, Speed, Damage, Ammo;
-        public Image ItemImage;
+        public Sprite ItemSprite;
 
-        public Data(string itemName, float health,float speed,float damage,float ammo,Image image){
+        public Data(string itemName, float health,float speed,float damage,float ammo,Sprite sprite){
             ItemName = itemName;
             Health = health;
             Speed = speed;
             Damage = damage;
             Ammo = ammo;
-            ItemImage = image;
+            ItemSprite = sprite;
         }
     }
     protected Data data = new Data("",0, 0, 0, 0, null);
