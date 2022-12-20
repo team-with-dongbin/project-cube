@@ -50,7 +50,7 @@ public class Item : MonoBehaviour{
         gameObject.tag = "Item";
 
         UpdateStat();
-        //ÇÃ·¹ÀÌ¾î°¡ È¹µæÇÒ¶§ ´Ù½Ã Ç®¾îÁà¾ßÇÔ.
+        //í”Œë ˆì´ì–´ê°€ íšë“í• ë•Œ ë‹¤ì‹œ í’€ì–´ì¤˜ì•¼í•¨.
         dropped = true;
         rigidbody.constraints =
             RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | 

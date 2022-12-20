@@ -13,7 +13,7 @@ public class Cube : Item, IDamageable{
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
-    public Image cubeImage;
+    public Sprite[] cubeSprites;
 
     public enum Type {Health, Speed, Damage, Ammo, Size}
     public Type type;
@@ -28,8 +28,7 @@ public class Cube : Item, IDamageable{
         else if (type.Equals(Type.Speed)) data.Speed = 2;
         else if (type.Equals(Type.Damage)) data.Damage = 3;
         else if (type.Equals(Type.Ammo)) data.Ammo = 1;
-        cubeImage.color = c[(int)type];
-        data.ItemImage = cubeImage;
+        data.ItemSprite = cubeSprites[(int)type];
         data.ItemName = "Cube";
         itemType = ItemType.Cube;
     }

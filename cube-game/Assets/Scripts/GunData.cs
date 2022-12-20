@@ -5,6 +5,7 @@ public class GunData : ScriptableObject{
     public AudioClip shotClip;
     public AudioClip reloadClip;
     public GameObject bullet;
+    public Sprite gunSprite;
 
     public float damage = 0;
     public float bulletSpeed = 0;

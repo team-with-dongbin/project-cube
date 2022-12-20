@@ -10,8 +10,6 @@ public class Gun : Weapon, IReloadable
     private AudioSource audioSource;
     [SerializeField]
     private GunData gunData;
-    [SerializeField]
-    private Image gunImage;
 
     public int ammoRemain = 100; // 남은 전체 탄알
     public int magAmmo; // 현재 탄알집에 남아 있는 탄알
@@ -27,6 +25,7 @@ public class Gun : Weapon, IReloadable
         state = State.Ready;
         lastFireTime = 0;
         data.Damage = gunData.damage;
+        data.ItemSprite = gunData.gunSprite;
         data.ItemName = "Gun";
     }
 
