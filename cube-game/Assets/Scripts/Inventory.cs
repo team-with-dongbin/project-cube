@@ -5,18 +5,17 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
-    private GameObject inventoryPanel;
+    private GameObject inventoryWindow;
     [SerializeField]
-    private GameObject Content;
-    
+    private GameObject itemSlot;
+
     private bool activeInventory = false;
     private Slot[] slot;
-    GameObject nearObject;
-
+    
     void Start()
     {
-        slot = Content.GetComponentsInChildren<Slot>();
-        inventoryPanel.SetActive(activeInventory);
+        slot = itemSlot.GetComponentsInChildren<Slot>();
+        inventoryWindow.SetActive(activeInventory);
     }
 
     void Update()
@@ -29,7 +28,24 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             activeInventory = !activeInventory;
-            inventoryPanel.SetActive(activeInventory);
+            inventoryWindow.SetActive(activeInventory);
+        }
+    }
+
+    public void AcquireItem(GameObject newItem)
+    {
+        for (int i = 0; i < slot.Length; i++)
+        {
+            if (slot[i].AddCount(newItem))
+                return;
+        }
+        for (int i = 0; i < slot.Length; i++)
+        {
+            if (slot[i].item.Count == 0)
+            {
+                slot[i].NewSlot(newItem);
+                return;
+            }
         }
     }
 }

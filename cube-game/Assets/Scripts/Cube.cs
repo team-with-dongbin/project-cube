@@ -22,6 +22,7 @@ public class Cube : Item, IDamageable{
 
     public void Awake() {
         type = (Type)UnityEngine.Random.Range(0, (int)Type.Size);
+        data.ItemNumber += (int)type;
         GetComponent<Renderer>().material.SetColor("_Color", c[(int)type]);
         if (type.Equals(Type.Health)) data.Health = 3;
         else if (type.Equals(Type.Speed)) data.Speed = 2;
@@ -29,8 +30,12 @@ public class Cube : Item, IDamageable{
         else if (type.Equals(Type.Ammo)) data.Ammo = 1;
         data.ItemSprite = cubeSprites[(int)type];
         data.ItemName = "Cube";
+        itemType = ItemType.Cube;
     }
-
+    void Start()
+    {
+        Drop();
+    }
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal) {
         hp -= damage;
         if (hp <= 0){

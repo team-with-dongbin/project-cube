@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     CameraController cameraController;
 
+    [SerializeField]
+    private Inventory inventory;
     GameObject nearObject = null;
 
     public float moveSpeed = 4f;
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.transform.tag == "Item")
         {
-            Debug.Log(other.tag + " 줍기");
+            //Debug.Log(other.tag + " 줍기");
             nearObject = other.gameObject;
         }
     }
@@ -114,7 +116,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void GetItem(GameObject item){
-        item.transform.parent = transform.GetChild(3);
+        inventory.AcquireItem(item);
         nearObject = null;
         item.SetActive(false);
     }

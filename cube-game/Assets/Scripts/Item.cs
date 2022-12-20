@@ -9,22 +9,25 @@ public class Item : MonoBehaviour{
     public struct Data{
         public string ItemName;
         public float Health, Speed, Damage, Ammo;
-        public Sprite ItemSprite;
+        public Image ItemImage;
+        public int ItemNumber;
 
-        public Data(string itemName, float health,float speed,float damage,float ammo,Sprite sprite){
+        public Data(string itemName, float health,float speed,float damage,float ammo,Image image, int itemNumber){
             ItemName = itemName;
             Health = health;
             Speed = speed;
             Damage = damage;
             Ammo = ammo;
-            ItemSprite = sprite;
+            ItemImage = image;
+            ItemNumber = itemNumber;
         }
     }
-    protected Data data = new Data("",0, 0, 0, 0, null);
+    public Data data = new Data("",0, 0, 0, 0, null, 1000);
 
     public enum ItemType{
         Equipment, Cube, Gun, Knife, potion, size
     }
+    public ItemType itemType;
 
     public void Update(){
         if (dropped)
@@ -40,14 +43,14 @@ public class Item : MonoBehaviour{
         Transform transform = GetComponent<Transform>();
         transform.localScale /= 3;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        boxCollider.size /= 1000;
+        //boxCollider.size /= 1000;
         boxCollider.center = Vector3.down / 2;
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         gameObject.layer = LayerMask.NameToLayer("Item");
         gameObject.tag = "Item";
 
         UpdateStat();
-        //ÇÃ·¹ÀÌ¾î°¡ È¹µæÇÒ¶§ ´Ù½Ã Ç®¾îÁà¾ßÇÔ.
+        //í”Œë ˆì´ì–´ê°€ íšë“í• ë•Œ ë‹¤ì‹œ í’€ì–´ì¤˜ì•¼í•¨.
         dropped = true;
         rigidbody.constraints =
             RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | 
