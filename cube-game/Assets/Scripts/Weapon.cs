@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using CubeGame;
 
 public abstract class Weapon : Item
 {
