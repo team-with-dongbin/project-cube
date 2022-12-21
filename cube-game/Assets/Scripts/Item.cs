@@ -8,11 +8,6 @@ public class Item : MonoBehaviour
     protected bool dropped = false;
     public ItemData data;
 
-    void Start()
-    {
-    }
-    public ItemType itemType;
-
     public virtual void Update()
     {
         if (dropped)
