@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using CubeGame;
 
 public class PlayerController : MonoBehaviour
 {
@@ -99,7 +98,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.transform.tag == "Item")
         {
-            //Debug.Log(other.tag + " ащ╠Б");
             nearObject = other.gameObject;
         }
     }
@@ -115,7 +113,8 @@ public class PlayerController : MonoBehaviour
             GetItem(nearObject);
     }
 
-    private void GetItem(GameObject item){
+    private void GetItem(GameObject item)
+    {
         inventory.AcquireItem(item);
         nearObject = null;
         item.SetActive(false);

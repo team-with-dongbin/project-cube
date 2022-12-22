@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5eeb812487d29543bb8918d3b41170e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 06de800beef83814c8b9922669dbcce8, type: 2}
   fireTransform: {fileID: 7268606113053656358}
-  gunData: {fileID: 11400000, guid: 06de800beef83814c8b9922669dbcce8, type: 2}
   ammoRemain: 100
   magAmmo: 0
 --- !u!82 &8444043240322286678

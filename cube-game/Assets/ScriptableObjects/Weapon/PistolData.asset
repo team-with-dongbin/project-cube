@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41ebb01a0cc82348b06705631c71968, type: 3}
   m_Name: PistolData
   m_EditorClassIdentifier: 
+  id: 0
+  itemName: basic pistol
+  icon: {fileID: 21300000, guid: 1b377e5c845269940ab7705a66f09a28, type: 3}
+  itemType: 2
+  desription: 
+  damage: 15
   shotClip: {fileID: 8300000, guid: 051280652806df7418ef97accbf0b4a0, type: 3}
   reloadClip: {fileID: 8300000, guid: 6e807289f24b4c548bfc5f552d931aad, type: 3}
   bullet: {fileID: 1694226804847452936, guid: 67805c01305426649acc0d3a4dfea2b2, type: 3}
-  gunSprite: {fileID: 21300000, guid: 1b377e5c845269940ab7705a66f09a28, type: 3}
-  damage: 15
-  bulletSpeed: 10
-  startAmmoRemain: 500
+  bulletSpeed: 10.05
+  initialAmmoRemain: 100
   magCapacity: 24
   timeBetFire: 0.12
   reloadTime: 1.8

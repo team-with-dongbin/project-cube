@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CubeGame;
 
 public class AnimationController : MonoBehaviour
 {
@@ -28,7 +27,7 @@ public class AnimationController : MonoBehaviour
 
     public void SetWeaponType(WeaponType weaponType)
     {
-        if (weaponType == WeaponType.NoWeapon || weaponType == WeaponType.Sword)
+        if (weaponType == WeaponType.NotWeapon || weaponType == WeaponType.Sword)
         {
             animator.runtimeAnimatorController = noWeaponAnimator;
         }
