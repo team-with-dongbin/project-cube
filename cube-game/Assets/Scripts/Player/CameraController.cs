@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController instance;
     CinemachineVirtualCamera _mainCamera;
 
     [SerializeField]
@@ -41,7 +42,9 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         _mainCamera = firstViewCamera;
+        ChangeCameraViewToFirst();
     }
 
     void Start()

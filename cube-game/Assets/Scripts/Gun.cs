@@ -8,8 +8,8 @@ public class Gun : Weapon, IReloadable
     public enum State { Ready, Empty, Reloading }
     private State state;
     public Transform fireTransform; // 탄알이 발사될 위치
-    public Transform cameraTransform;
     private AudioSource audioSource;
+    private Transform cameraTransform;
     private GunData _gunData;
     
     public int ammoRemain; // 남은 전체 탄알
@@ -30,7 +30,7 @@ public class Gun : Weapon, IReloadable
         magAmmo = _gunData.magCapacity;
 
         state = State.Ready;
-
+        cameraTransform = GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();
     }
 
