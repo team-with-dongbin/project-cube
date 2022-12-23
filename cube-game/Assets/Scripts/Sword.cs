@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
+    RaycastHit hit;
     const int CubeLayer = 9;
     public float baseDamage = 10;
 
@@ -17,11 +18,5 @@ public class Sword : Weapon
         return WeaponType.Sword;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == CubeLayer)
-        {
-            Debug.Log("Attack Cube !!");
-        }
-    }
+    
 }
