@@ -22,6 +22,8 @@ public class Cube : Item, IDamageable
         if (!audioSource)
         {
             audioSource = GetComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
         }
 
         GetComponent<Renderer>().material.SetColor("_Color", _cubeData.color);

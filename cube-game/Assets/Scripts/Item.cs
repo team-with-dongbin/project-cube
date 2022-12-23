@@ -17,6 +17,7 @@ public class Item : MonoBehaviour
     public virtual void Drop()
     {
         transform.localScale /= 3;
+        transform.rotation = Quaternion.identity;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
         //boxCollider.size /= 1000;
         boxCollider.center = Vector3.down / 2;
