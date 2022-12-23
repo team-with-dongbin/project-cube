@@ -5,11 +5,19 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField]
+    StatusController statusController;
+
+    [SerializeField]
     AnimationController animationController;
     Weapon weapon;
 
     void Start()
     {
+        if (statusController == null)
+        {
+            statusController = GetComponent<StatusController>();
+        }
+
         if (animationController == null)
         {
             animationController = GetComponent<AnimationController>();
@@ -32,7 +40,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-        weapon.Attack(1.0f);
+        weapon.Attack(statusController.nowStatus.attackPower);
         animationController.Attack();
     }
 

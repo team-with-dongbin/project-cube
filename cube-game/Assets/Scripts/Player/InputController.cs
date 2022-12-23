@@ -71,6 +71,11 @@ public class InputController : MonoBehaviour
         }
     }
 
+    void OnPickUpInput()
+    {
+        playerController.PickUp();
+    }
+
     void OnSprintInput(InputValue value)
     {
         float input = value.Get<float>();
