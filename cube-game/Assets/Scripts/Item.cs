@@ -7,6 +7,12 @@ public class Item : MonoBehaviour
 {
     protected bool dropped = false;
     public ItemData data;
+    protected SphereCollider sphereCollider;
+
+    private void Awake()
+    {
+        sphereCollider = gameObject.GetComponent<SphereCollider>();
+    }
 
     public virtual void Update()
     {
@@ -19,6 +25,7 @@ public class Item : MonoBehaviour
         transform.localScale /= 3;
         transform.rotation = Quaternion.identity;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
+        sphereCollider.enabled = true;
         //boxCollider.size /= 1000;
         boxCollider.center = Vector3.down / 2;
         Rigidbody rigidbody = GetComponent<Rigidbody>();
