@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Knife : Weapon
@@ -22,15 +23,17 @@ public class Knife : Weapon
 
     private void Update()
     {
-        Debug.DrawRay(cameraTransform.position, cameraTransform.position + cameraTransform.forward * _knifeData.attackRange, Color.red);
+        Debug.DrawRay(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward)*_knifeData.attackRange, Color.red);
     }
 
     public override void Attack(float baseDamage)
     {
         if (state == State.Idle)
         {
+            int layerMask = int.MaxValue & 1 << LayerMask.NameToLayer("Cube");
+
             RaycastHit hit;
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward,out hit,_knifeData.attackRange))
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward), out hit, _knifeData.attackRange, layerMask))
             {
                 IDamageable target = hit.collider.GetComponent<IDamageable>();
                 target?.OnDamage(_knifeData.damage, hit.point, hit.normal);

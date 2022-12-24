@@ -20,6 +20,11 @@ public class Cube : Item, IDamageable
         audioSource = GetComponent<AudioSource>();
     }
 
+    public void OnEnable()
+    {
+        sphereCollider.enabled = false;
+    }
+
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
     {
         hp -= damage;
