@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
 
     public void ChangeCameraViewToThird()
     {
-        // MainCamera = thirdViewCamera;
+        MainCamera = thirdViewCamera;
     }
 
     internal void RotateX(float xDegree)
