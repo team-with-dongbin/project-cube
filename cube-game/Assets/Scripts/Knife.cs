@@ -21,9 +21,9 @@ public class Knife : Weapon
         _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height + 1.0f;
     }
 
-    private void Update()
+    public override void Update()
     {
-        Debug.DrawRay(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward)*_knifeData.attackRange, Color.red);
+        // Debug.DrawRay(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward) * _knifeData.attackRange, Color.red);
     }
 
     public override void Attack(float baseDamage)
