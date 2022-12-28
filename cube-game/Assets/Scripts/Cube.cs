@@ -25,6 +25,7 @@ public class Cube : Item, IDamageable
         }
         GetComponent<Renderer>().material.SetColor("_Color", _cubeData.color);
         audioSource = GetComponent<AudioSource>();
+        Drop();
     }
 
     public void OnEnable()

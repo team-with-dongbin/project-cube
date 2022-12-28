@@ -59,9 +59,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        Move();
-        Rotate();
+        if (!Inventory.activeInventory)
+        {
+            Move();
+            Rotate();
+        }
     }
     void Move()
     {
