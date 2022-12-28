@@ -11,7 +11,7 @@ public class Gun : Weapon, IReloadable
     private AudioSource audioSource;
     private Transform cameraTransform;
     private GunData _gunData;
-    
+
     public int ammoRemain; // 남은 전체 탄알
     public int magAmmo; // 현재 탄알집에 남아 있는 탄알
 
@@ -54,11 +54,16 @@ public class Gun : Weapon, IReloadable
         }
     }
 
+    public override float CalculateDamage(float basePower)
+    {
+        return basePower + _gunData.damage;
+    }
+
     // 실제 발사 처리
     private void Shot(float basePower)
     {
         GameObject instantBullet = Instantiate(_gunData.bullet, cameraTransform.position, cameraTransform.rotation);
-        instantBullet.GetComponent<Bullet>().ValueSetting(_gunData.damage * basePower, _gunData.bulletSpeed);
+        instantBullet.GetComponent<Bullet>().ValueSetting(CalculateDamage(basePower), _gunData.bulletSpeed);
 
         audioSource.PlayOneShot(_gunData.shotClip);
         magAmmo--;

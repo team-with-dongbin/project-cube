@@ -26,7 +26,12 @@ public class Knife : Weapon
         // Debug.DrawRay(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward) * _knifeData.attackRange, Color.red);
     }
 
-    public override void Attack(float baseDamage)
+    public override float CalculateDamage(float basePower)
+    {
+        return basePower + _knifeData.damage;
+    }
+
+    public override void Attack(float basePower)
     {
         if (state == State.Idle)
         {
@@ -36,7 +41,7 @@ public class Knife : Weapon
             if (Physics.Raycast(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward), out hit, _knifeData.attackRange, layerMask))
             {
                 IDamageable target = hit.collider.GetComponent<IDamageable>();
-                target?.OnDamage(_knifeData.damage, hit.point, hit.normal);
+                target?.OnDamage(CalculateDamage(basePower), hit.point, hit.normal);
             }
             audioSource.PlayOneShot(_knifeData.swingClip);
         }
