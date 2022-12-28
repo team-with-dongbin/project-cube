@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Rotate();
-        PickUp();
     }
 
     void Move()

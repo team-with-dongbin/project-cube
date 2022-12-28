@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
     [SerializeField]
     WeaponController weaponController;
 
+    // Basic Weapon은 인벤토리가 완성 되기 전 까지의 임시 변수임.
     [SerializeField]
     Weapon basicWeapon1;
 
@@ -28,8 +29,8 @@ public class InputController : MonoBehaviour
         if (weaponController == null)
         {
             weaponController = GetComponent<WeaponController>();
-            weaponController.SetWeapon(basicWeapon1);
         }
+        weaponController.SetWeapon(basicWeapon1);
     }
 
     void Update()
