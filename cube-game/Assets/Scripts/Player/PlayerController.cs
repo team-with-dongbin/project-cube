@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         Move();
         Rotate();
     }
-
     void Move()
     {
         Vector2 inputVector = moveDirection;
