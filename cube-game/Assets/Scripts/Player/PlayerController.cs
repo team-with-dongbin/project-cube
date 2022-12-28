@@ -52,9 +52,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+<<<<<<< Updated upstream
         Move();
         Rotate();
         PickUp();
+=======
+            Rotate();
+            Move();
+            PickUp();
+        
+>>>>>>> Stashed changes
     }
 
     void Move()
