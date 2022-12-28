@@ -16,6 +16,13 @@ public class Cube : Item, IDamageable
             data = ItemDictionary.instance.GetRandomDataOfType(ItemType.Cube);
         }
         _cubeData = data as CubeData;
+
+        if (!audioSource)
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
+        }
         GetComponent<Renderer>().material.SetColor("_Color", _cubeData.color);
         audioSource = GetComponent<AudioSource>();
     }
