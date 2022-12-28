@@ -622,6 +622,10 @@ PrefabInstance:
       value: -0.0000000056954317
       objectReference: {fileID: 0}
     - target: {fileID: 3058756097295219866, guid: 829c10c3f3155dc438dfdb589ba711d4, type: 3}
+      propertyPath: m_Name
+      value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058756097295219866, guid: 829c10c3f3155dc438dfdb589ba711d4, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -641,6 +645,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 627836713}
+    - target: {fileID: 6283495916355840069, guid: 829c10c3f3155dc438dfdb589ba711d4, type: 3}
+      propertyPath: basicWeapon1
+      value: 
+      objectReference: {fileID: 2108333924}
     - target: {fileID: 6283495916355840069, guid: 829c10c3f3155dc438dfdb589ba711d4, type: 3}
       propertyPath: playerController
       value: 
@@ -1493,25 +1501,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdd8b59fd28ade14d951aeeb4c9644d0, type: 3}
---- !u!1 &515028283 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3058756097295219866, guid: 829c10c3f3155dc438dfdb589ba711d4, type: 3}
-  m_PrefabInstance: {fileID: 176472273}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &515028289
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515028283}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.1958712
-  m_Height: 1.4156291
-  m_Direction: 1
-  m_Center: {x: -0.000002015957, y: 0.50359076, z: 0.00000022931928}
 --- !u!1 &520258407 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2705694106054073352, guid: 3c7d5dece75cf9845ad850601668e7d8, type: 3}
@@ -7658,6 +7647,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6839806758083486199, guid: 3c7d5dece75cf9845ad850601668e7d8, type: 3}
+--- !u!114 &2108333924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 614547107266208790, guid: 829c10c3f3155dc438dfdb589ba711d4, type: 3}
+  m_PrefabInstance: {fileID: 176472273}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afba50b87450c846b8d9c5598eeac54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2126237735
 GameObject:
   m_ObjectHideFlags: 0
