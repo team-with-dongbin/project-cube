@@ -25,7 +25,6 @@ public class Cube : Item, IDamageable
             audioSource.playOnAwake = false;
             audioSource.loop = false;
         }
-
         GetComponent<Renderer>().material.SetColor("_Color", _cubeData.color);
     }
 

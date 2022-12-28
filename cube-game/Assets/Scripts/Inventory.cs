@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,9 +12,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject itemSlot;
 
-    private bool activeInventory = false;
+    public static bool activeInventory = false;
     private Slot[] slot;
-    
+
     void Start()
     {
         slot = itemSlot.GetComponentsInChildren<Slot>();
@@ -29,6 +32,7 @@ public class Inventory : MonoBehaviour
         {
             activeInventory = !activeInventory;
             inventoryWindow.SetActive(activeInventory);
+
         }
     }
 
@@ -41,7 +45,7 @@ public class Inventory : MonoBehaviour
         }
         for (int i = 0; i < slot.Length; i++)
         {
-            if (slot[i].item.Count == 0)
+            if (!slot[i].item.Any())
             {
                 slot[i].NewSlot(newItem);
                 return;

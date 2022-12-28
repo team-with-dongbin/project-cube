@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-
+        
     }
 
     public void ChangeCameraViewToFirst()
