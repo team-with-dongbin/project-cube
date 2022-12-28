@@ -67,6 +67,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         DragSlot.instance.dragSlot = this;
         DragSlot.instance.SetDragImage(itemImage);
+        DragSlot.instance.SetDragText(countText.text);
         if (item.Any())
             DragSlot.instance.SetAlpha(1f);
         DragSlot.instance.transform.position = eventData.position;
@@ -88,6 +89,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     public void OnEndDrag(PointerEventData eventData)
     {
         DragSlot.instance.SetAlpha(0f);
+        DragSlot.instance.SetDragText("");
         DragSlot.instance.transform.position = Vector3.zero;
         DragSlot.instance.SetTransform(Vector3.zero);
     }

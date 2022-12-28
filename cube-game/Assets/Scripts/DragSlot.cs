@@ -10,6 +10,8 @@ public class DragSlot : MonoBehaviour
 
     [SerializeField]
     private Image dragImage;
+    [SerializeField]
+    private Text dragText;
 
     void Start()
     {
@@ -19,6 +21,11 @@ public class DragSlot : MonoBehaviour
     public void SetDragImage(Image itemImage)
     {
         dragImage.sprite = itemImage.sprite;
+    }
+
+    public void SetDragText(string countText)
+    {
+        dragText.text = countText;
     }
 
     public void SetTransform(Vector3 position)
