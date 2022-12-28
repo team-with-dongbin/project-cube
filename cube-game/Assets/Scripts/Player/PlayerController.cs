@@ -13,10 +13,14 @@ public class PlayerController : MonoBehaviour
     CameraController cameraController;
 
     [SerializeField]
-    private Inventory inventory;
+    Inventory inventory;
+
+    [SerializeField]
+    StatusController statusController;
+
+
     GameObject nearObject = null;
 
-    public float moveSpeed = 4f;
     internal Vector2 moveDirection = Vector2.zero;
 
     public float sprintSppedRatio = 1.5f;
@@ -47,16 +51,16 @@ public class PlayerController : MonoBehaviour
         {
             cameraController = GetComponent<CameraController>();
         }
+        if (statusController == null)
+        {
+            statusController = GetComponent<StatusController>();
+        }
     }
 
     void Update()
     {
-        if (!Inventory.activeInventory)
-        {
-            Move();
-            Rotate();
-            PickUp();
-        }
+        Move();
+        Rotate();
     }
 
     void Move()
@@ -70,7 +74,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVector = rigidBody.transform.forward * inputVector.y;
         moveVector += Quaternion.Euler(0, 90f, 0f) * rigidBody.transform.forward * inputVector.x;
 
-        rigidBody.MovePosition(rigidBody.position + moveVector * moveSpeed * Time.deltaTime);
+        rigidBody.MovePosition(rigidBody.position + moveVector * statusController.nowStatus.movementSpeed * Time.deltaTime);
         animationController.SetMoveVector(inputVector);
     }
 
@@ -112,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     public void PickUp()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && nearObject != null)
+        if (nearObject != null)
             GetItem(nearObject);
     }
 

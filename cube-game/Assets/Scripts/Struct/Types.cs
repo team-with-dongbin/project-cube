@@ -3,7 +3,7 @@ using UnityEngine;
 public enum WeaponType
 {
     NotWeapon,
-    Sword,
+    Knife,
     Pistol,
 }
 

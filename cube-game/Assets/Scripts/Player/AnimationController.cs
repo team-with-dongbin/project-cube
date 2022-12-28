@@ -27,7 +27,7 @@ public class AnimationController : MonoBehaviour
 
     public void SetWeaponType(WeaponType weaponType)
     {
-        if (weaponType == WeaponType.NotWeapon || weaponType == WeaponType.Sword)
+        if (weaponType == WeaponType.NotWeapon || weaponType == WeaponType.Knife)
         {
             animator.runtimeAnimatorController = noWeaponAnimator;
         }

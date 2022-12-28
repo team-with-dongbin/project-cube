@@ -7,8 +7,6 @@ public class Cube : Item, IDamageable
 {
     private float hp = 100f;
     private CubeData _cubeData;
-
-    [SerializeField]
     private AudioSource audioSource;
 
     void Start()
@@ -26,6 +24,12 @@ public class Cube : Item, IDamageable
             audioSource.loop = false;
         }
         GetComponent<Renderer>().material.SetColor("_Color", _cubeData.color);
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void OnEnable()
+    {
+        sphereCollider.enabled = false;
     }
 
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
