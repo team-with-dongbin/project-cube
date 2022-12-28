@@ -18,7 +18,7 @@ public class Knife : Weapon
         state = State.Idle;
         cameraTransform = GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();
-        _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height+10f;
+        _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height + 1.0f;
     }
 
     private void Update()
