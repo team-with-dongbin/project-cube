@@ -24,4 +24,9 @@ public static class Utils
         int random = UnityEngine.Random.Range(0, values.Length);
         return (T)values.GetValue(random);
     }
+
+    public static Transform GetFirstViewCameraTransform()
+    {
+        return CameraController.instance.firstViewCamera.transform;
+    }
 }

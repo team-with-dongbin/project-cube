@@ -30,7 +30,7 @@ public class Gun : Weapon, IReloadable
         magAmmo = _gunData.magCapacity;
 
         state = State.Ready;
-        cameraTransform = GetFirstViewCameraTransform();
+        cameraTransform = Utils.GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();
     }
 

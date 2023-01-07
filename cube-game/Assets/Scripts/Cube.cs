@@ -5,18 +5,22 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class Cube : Item, IDamageable
 {
-    private float hp = 100f;
-    private CubeData _cubeData;
+    public float hp = 100f;
+    private float range = 2.0f;
+    public CubeData cubeData;
     private AudioSource audioSource;
+    private Transform cameraTransform;
+
     void Start()
     {
         if (data == null)
         {
             data = ItemDictionary.instance.GetRandomDataOfType(ItemType.Cube);
         }
-        _cubeData = data as CubeData;
-        GetComponent<Renderer>().material.SetColor("_Color", _cubeData.color);
+        cubeData = data as CubeData;
+        GetComponent<Renderer>().material.SetColor("_Color", cubeData.color);
         audioSource = GetComponent<AudioSource>();
+        cameraTransform = Utils.GetFirstViewCameraTransform();
     }
 
     public void OnEnable()
@@ -34,15 +38,27 @@ public class Cube : Item, IDamageable
         }
         else
         {
-            audioSource.clip = _cubeData.strikeSound;
+            audioSource.clip = cubeData.strikeSound;
             audioSource.Play();
         }
     }
 
     private void Destruction()
     {
-        audioSource.clip = _cubeData.destroySound;
+        audioSource.clip = cubeData.destroySound;
         audioSource.Play();
+        //이 큐브가 그림판에 fix된 상태였는데 부서진거였다면,
+        if (transform.parent != null)
+        {
+            if (transform.parent.GetComponent<Picture>() != null)
+            {
+                Picture.instance.restore(gameObject);
+            }
+        }
         Drop();
+    }
+    protected override void Update()
+    {
+        base.Update();
     }
 }

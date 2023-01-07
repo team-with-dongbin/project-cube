@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Picture : MonoBehaviour
 {
+    public static Picture instance;
     [SerializeField]
     private GameObject Cube;
 
     private Color[,] pictureColors;
     private GameObject[,] picture;
+    Dictionary<GameObject, (int, int)> picture_coordinates;
+    Dictionary<GameObject, (int, int)> cube_coordinates;
+
+    private int remainPicture;
 
     private void Awake()
     {
+        instance = this;
         pictureColors = PictureDictionary.instance.pictureDatas[Random.Range(0, PictureDictionary.instance.pictureDatas.Count)];
         picture = new GameObject[pictureColors.GetLength(0),pictureColors.GetLength(1)];
+        remainPicture = pictureColors.GetLength(0) * pictureColors.GetLength(1);
     }
     // Start is called before the first frame update
     void Start()
@@ -29,6 +36,7 @@ public class Picture : MonoBehaviour
             for (int j = 0, y = picture.GetLength(1); j < y; j++)
             {
                 GameObject dot = Instantiate(Cube, picturePos + new Vector3(i - x / 2, 1, j - y / 2), Quaternion.identity);
+                picture_coordinates.Add(dot, (i, j));
                 Color dotColor = pictureColors[i, j];
                 dotColor.a = 0.3f;
                 dot.GetComponent<Renderer>().material.color = dotColor;
@@ -41,6 +49,34 @@ public class Picture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        if (remainPicture == 0) 
+        {
+            //Gameover
+        }
+    }
+
+
+    public void fitCube(GameObject pictureCube, GameObject cube)
+    {
+        pictureCube.SetActive(false);
+        cube.SetActive(false);
+        cube.transform.SetParent(transform);
+        cube.transform.localScale = pictureCube.transform.localScale;
+        cube.transform.position = pictureCube.transform.position;
+        cube.transform.rotation = pictureCube.transform.rotation;
+        cube.GetComponent<Cube>().hp = cube.GetComponent<Cube>().cubeData.initialHp * 5;
+        cube.SetActive(true);
+        remainPicture--;
+    }
+
+    public void restore(GameObject cube)
+    {
+        var coordinate = cube_coordinates[cube];
+        cube.SetActive(false);
+        cube.transform.localScale = Vector3.one;
+        cube.transform.parent = null;
+        cube_coordinates.Remove(cube);
+        cube.SetActive(true);
+        remainPicture++;
     }
 }

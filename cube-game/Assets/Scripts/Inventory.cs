@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     public static bool activeInventory = false;
     private Slot[] slot;
-
+    
     void Start()
     {
         slot = itemSlot.GetComponentsInChildren<Slot>();
