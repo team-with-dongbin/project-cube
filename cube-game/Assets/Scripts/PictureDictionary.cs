@@ -7,7 +7,7 @@ using System.IO;
 public class PictureDictionary : MonoBehaviour
 {
     public static PictureDictionary instance;
-    Dictionary<char,Color> Manufacture= new Dictionary<char,Color>();
+    Dictionary<char, Color> Manufacture = new Dictionary<char, Color>();
     public List<Color[,]> pictureDatas = new List<Color[,]>();
     void Awake()
     {
@@ -20,6 +20,7 @@ public class PictureDictionary : MonoBehaviour
         Manufacture['X'] = Color.black;
         Manufacture['M'] = Color.magenta;
         Manufacture['C'] = Color.cyan;
+
         string path = Application.dataPath + "/Pictures";
         string[] pictures = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
 
@@ -27,7 +28,7 @@ public class PictureDictionary : MonoBehaviour
         {
             if (!dir.Contains(".meta"))
             {
-                string[] dots = File.ReadAllText(dir).Split('\n',' ');
+                string[] dots = File.ReadAllText(dir).Split('\n', ' ');
                 Color[,] picture = new Color[dots.Length, dots[0].Length];
                 for (int i = 0; i < dots.Length; i++)
                 {

@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InteractionInput",
+                    "type": "Button",
+                    "id": "4baef1aa-b7e2-42a4-b71f-a71ac7e41aa6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -263,6 +272,17 @@
                     "processors": "",
                     "groups": "PC;Mobile",
                     "action": "PickUpInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "97495f1d-2513-4e15-80e8-d5b69709895f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC;Mobile",
+                    "action": "InteractionInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

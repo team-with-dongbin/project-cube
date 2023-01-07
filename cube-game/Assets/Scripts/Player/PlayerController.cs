@@ -13,9 +13,6 @@ public class PlayerController : MonoBehaviour
     CameraController cameraController;
 
     [SerializeField]
-    Inventory inventory;
-
-    [SerializeField]
     StatusController statusController;
 
 
@@ -59,11 +56,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!Inventory.activeInventory)
+        if (!Inventory.instance.activeInventory)
         {
             Move();
-            Rotate();
         }
+        Rotate();
     }
     void Move()
     {
@@ -124,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void GetItem(GameObject item)
     {
-        inventory.AcquireItem(item);
+        Inventory.instance.AcquireItem(item);
         nearObject = null;
         item.SetActive(false);
     }

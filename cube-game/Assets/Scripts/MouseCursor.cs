@@ -6,7 +6,7 @@ public class MouseCursor : MonoBehaviour
 {
     void Update()
     {
-        if(Inventory.activeInventory)
+        if (Inventory.instance.activeInventory)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
