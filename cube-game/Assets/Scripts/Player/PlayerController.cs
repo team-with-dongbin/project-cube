@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
             Rotate();
+            LookPixel();
         }
     }
     void Move()
@@ -127,5 +128,18 @@ public class PlayerController : MonoBehaviour
         inventory.AcquireItem(item);
         nearObject = null;
         item.SetActive(false);
+    }
+    private void LookPixel()
+    {
+        int layerMask = int.MaxValue & 1 << LayerMask.NameToLayer("Picture");
+        float range = 5.0f;
+        RaycastHit hit;
+        Transform cameraTransform = Utils.GetFirstViewCameraTransform();
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward), out hit, range, layerMask))
+        {
+            Debug.Log("!");
+            //Utils.DrawOutline(hit.transform.gameObject);
+            Picture.instance.DrawOutline(hit.transform.gameObject);
+        }
     }
 }

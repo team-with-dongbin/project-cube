@@ -7,13 +7,14 @@ public class PictureCube : MonoBehaviour
     //private GameObject pictureCube;
     private bool isActive = false;
     // Update is called once per frame
+
     void Update()
     {
         if (isActive)
         {
-            Color newColor = GetComponent<Renderer>().material.color;
-            newColor.a = 1f;
-            GetComponent<Renderer>().material.color = newColor;
+            Color color = GetComponents<Renderer>()[0].material.color;
+            color.a = 1.0f;
+            GetComponents<Renderer>()[0].material.color = color;
         }
     }
 

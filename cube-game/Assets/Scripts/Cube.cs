@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Cube : Item, IDamageable
 {
     public float hp = 100f;
-    private float range = 2.0f;
     public CubeData cubeData;
     private AudioSource audioSource;
     private Transform cameraTransform;

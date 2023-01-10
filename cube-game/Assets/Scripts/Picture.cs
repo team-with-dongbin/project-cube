@@ -10,10 +10,11 @@ public class Picture : MonoBehaviour
 
     private Color[,] pictureColors;
     private GameObject[,] picture;
-    Dictionary<GameObject, (int, int)> picture_coordinates;
-    Dictionary<GameObject, (int, int)> cube_coordinates;
+    Dictionary<GameObject, (int, int)> picture_coordinates = new();
+    Dictionary<GameObject, (int, int)> cube_coordinates = new();
 
     private int remainPicture;
+    Material outline;
 
     private void Awake()
     {
@@ -21,6 +22,8 @@ public class Picture : MonoBehaviour
         pictureColors = PictureDictionary.instance.pictureDatas[Random.Range(0, PictureDictionary.instance.pictureDatas.Count)];
         picture = new GameObject[pictureColors.GetLength(0),pictureColors.GetLength(1)];
         remainPicture = pictureColors.GetLength(0) * pictureColors.GetLength(1);
+        //outline = new Material(Shader.Find("Custom/Outline"));
+        outline = new Material(Shader.Find("Draw/OutlineShader"));
     }
     // Start is called before the first frame update
     void Start()
@@ -35,12 +38,12 @@ public class Picture : MonoBehaviour
         for (int i = 0, x = picture.GetLength(0); i < x; i++)
             for (int j = 0, y = picture.GetLength(1); j < y; j++)
             {
-                GameObject dot = Instantiate(Cube, picturePos + new Vector3(i - x / 2, 1, j - y / 2), Quaternion.identity);
-                picture_coordinates.Add(dot, (i, j));
-                Color dotColor = pictureColors[i, j];
-                dotColor.a = 0.3f;
-                dot.GetComponent<Renderer>().material.color = dotColor;
-                picture[i, j] = dot;
+                GameObject pixel = Instantiate(Cube, picturePos + new Vector3(i - x / 2, 1, j - y / 2), Quaternion.identity);
+                picture_coordinates.Add(pixel, (i, j));
+                Color color = pictureColors[i, j];
+                color.a = 0.3f;
+                pixel.GetComponents<Renderer>()[0].material.color = color;
+                picture[i, j] = pixel;
                 picture[i, j].transform.SetParent(transform);
             }
         transform.localScale /= 2;
@@ -54,7 +57,6 @@ public class Picture : MonoBehaviour
             //Gameover
         }
     }
-
 
     public void fitCube(GameObject pictureCube, GameObject cube)
     {
@@ -78,5 +80,30 @@ public class Picture : MonoBehaviour
         cube_coordinates.Remove(cube);
         cube.SetActive(true);
         remainPicture++;
+    }
+
+    public void DrawOutline(GameObject pictureCube)
+    {
+        Renderer renderer = pictureCube.GetComponent<Renderer>();
+        if (renderer == null) return;
+
+        List<Material> materialList = new();
+        materialList.AddRange(renderer.sharedMaterials);
+        if (!materialList.Contains(outline))
+            materialList.Add(outline);
+        renderer.materials = materialList.ToArray();
+    }
+
+    public void EraseOutline(GameObject pictureCube)
+    {
+        Renderer renderer = pictureCube.GetComponent<Renderer>();
+        if (renderer == null) return;
+
+        List<Material> materialList = new();
+        //materialList.Clear();
+        materialList.AddRange(renderer.sharedMaterials);
+        if (materialList.Contains(outline))
+            materialList.Remove(outline);
+        renderer.materials = materialList.ToArray();
     }
 }

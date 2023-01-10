@@ -7,19 +7,19 @@ using System.IO;
 public class PictureDictionary : MonoBehaviour
 {
     public static PictureDictionary instance;
-    Dictionary<char,Color> Manufacture= new Dictionary<char,Color>();
+    Dictionary<char,Color> manufacture= new Dictionary<char,Color>();
     public List<Color[,]> pictureDatas = new List<Color[,]>();
     void Awake()
     {
         instance = this;
-        Manufacture['R'] = Color.red;
-        Manufacture['Y'] = Color.yellow;
-        Manufacture['G'] = Color.green;
-        Manufacture['B'] = Color.blue;
-        Manufacture['W'] = Color.white;
-        Manufacture['X'] = Color.black;
-        Manufacture['M'] = Color.magenta;
-        Manufacture['C'] = Color.cyan;
+        manufacture['R'] = Color.red;
+        manufacture['Y'] = Color.yellow;
+        manufacture['G'] = Color.green;
+        manufacture['B'] = Color.blue;
+        manufacture['W'] = Color.white;
+        manufacture['X'] = Color.black;
+        manufacture['M'] = Color.magenta;
+        manufacture['C'] = Color.cyan;
         string path = Application.dataPath + "/Pictures";
         string[] pictures = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
 
@@ -33,8 +33,8 @@ public class PictureDictionary : MonoBehaviour
                 {
                     for (int j = 0; j < dots[i].Length; j++)
                     {
-                        if (Manufacture.ContainsKey(dots[i][j]))
-                            picture[i, j] = Manufacture[dots[i][j]];
+                        if (manufacture.ContainsKey(dots[i][j]))
+                            picture[i, j] = manufacture[dots[i][j]];
                     }
                 }
                 pictureDatas.Add(picture);
