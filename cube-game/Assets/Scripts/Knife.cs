@@ -16,13 +16,14 @@ public class Knife : Weapon
     {
         _knifeData = data as KnifeData;
         state = State.Idle;
-        cameraTransform = GetFirstViewCameraTransform();
+        cameraTransform = Utils.GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();
         _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height + 1.0f;
     }
 
-    public override void Update()
+    protected override void Update()
     {
+        base.Update();
         // Debug.DrawRay(cameraTransform.position, cameraTransform.TransformDirection(Vector3.forward) * _knifeData.attackRange, Color.red);
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5425474813643220166}
   - component: {fileID: 8765118522983107407}
   - component: {fileID: 8793033271477224702}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PictureCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
