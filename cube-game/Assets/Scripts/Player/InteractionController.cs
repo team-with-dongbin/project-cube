@@ -47,6 +47,11 @@ public class InteractionController : MonoBehaviour
 
     void Interaction()
     {
+        if (_target)
+        {
+
+            // Picture.
+        }
         // target에는 Picture Cube가 있고,
         // 전역에서, picure를 불러오고.
         // inventory에서 같은 색의 큐브를 불러온다.
