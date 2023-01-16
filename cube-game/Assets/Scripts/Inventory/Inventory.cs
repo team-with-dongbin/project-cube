@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slot = itemSlot.GetComponentsInChildren<Slot>();
-        inventoryWindow.SetActive(activeInventory);
+        // inventoryWindow.SetActive(activeInventory);
     }
 
     void Update()
@@ -38,7 +38,6 @@ public class Inventory : MonoBehaviour
         {
             activeInventory = !activeInventory;
             inventoryWindow.SetActive(activeInventory);
-
         }
     }
 
