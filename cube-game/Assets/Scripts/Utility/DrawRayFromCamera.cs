@@ -5,15 +5,15 @@ using UnityEngine;
 public class DrawRayFromCamera : MonoBehaviour
 {
     // Start is called before the first frame update
-    Transform camera;
+    Transform _camera;
     void Start()
     {
-        camera = CameraController.instance.firstViewCamera.transform;
+        _camera = CameraController.instance.firstViewCamera.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(camera.position, camera.position + camera.forward * 100f, Color.red);
+        Debug.DrawRay(_camera.position, _camera.position + _camera.forward * 100f, Color.red);
     }
 }

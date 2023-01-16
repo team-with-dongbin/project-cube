@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 6080779698579856498}
   - component: {fileID: 437340714941573118}
   - component: {fileID: 8000951660296721274}
+  - component: {fileID: 3057722292546738391}
   m_Layer: 6
   m_Name: PlayerTinyHero
   m_TagString: Player
@@ -285,7 +286,6 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   animationController: {fileID: 0}
   cameraController: {fileID: 0}
-  inventory: {fileID: 0}
   statusController: {fileID: 0}
   sprintSppedRatio: 1.5
   jumpForce: 4
@@ -336,6 +336,22 @@ MonoBehaviour:
     attackPower: 0
     defense: 0
     movementSpeed: 4
+--- !u!114 &3057722292546738391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548902777119825910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff44d4819cfe4f14b88de25d3a954cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <laycastRange>k__BackingField: 2
+  targetLayerName:
+  - Picture
+  playerInput: {fileID: 68231667039283163}
 --- !u!1 &8039509421757911690
 GameObject:
   m_ObjectHideFlags: 0
