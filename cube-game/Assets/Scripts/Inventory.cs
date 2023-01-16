@@ -12,9 +12,15 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject itemSlot;
 
-    public static bool activeInventory = false;
+    public static Inventory instance;
+    public bool activeInventory = false;
     private Slot[] slot;
-    
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         slot = itemSlot.GetComponentsInChildren<Slot>();
