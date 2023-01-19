@@ -26,7 +26,6 @@ public class Cube : Item, IDamageable
         cubeData = data as CubeData;
         GetComponent<Renderer>().material.SetColor("_Color", cubeData.color);
         audioSource = GetComponent<AudioSource>();
-        cameraTransform = Utils.GetFirstViewCameraTransform();
     }
 
     public void OnEnable()
@@ -53,7 +52,6 @@ public class Cube : Item, IDamageable
     {
         audioSource.clip = cubeData.destroySound;
         audioSource.Play();
-        //�� ť�갡 �׸��ǿ� fix�� ���¿��µ� �μ����ſ��ٸ�,
         if (transform.parent != null)
         {
             if (transform.parent.GetComponent<Picture>() != null)
