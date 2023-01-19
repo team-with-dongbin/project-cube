@@ -8,7 +8,6 @@ public class Cube : Item, IDamageable
     public float hp = 100f;
     public CubeData cubeData;
     private AudioSource audioSource;
-    private Transform cameraTransform;
 
     void Start()
     {
@@ -19,7 +18,6 @@ public class Cube : Item, IDamageable
         cubeData = data as CubeData;
         GetComponent<Renderer>().material.SetColor("_Color", cubeData.color);
         audioSource = GetComponent<AudioSource>();
-        cameraTransform = Utils.GetFirstViewCameraTransform();
     }
 
     public void OnEnable()
