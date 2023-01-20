@@ -9,6 +9,13 @@ public class Cube : Item, IDamageable
     public CubeData cubeData;
     private AudioSource audioSource;
     private Transform cameraTransform;
+    public Color color
+    {
+        get
+        {
+            return cubeData.color;
+        }
+    }
 
     void Start()
     {
@@ -46,7 +53,7 @@ public class Cube : Item, IDamageable
     {
         audioSource.clip = cubeData.destroySound;
         audioSource.Play();
-        //ÀÌ Å¥ºê°¡ ±×¸²ÆÇ¿¡ fixµÈ »óÅÂ¿´´Âµ¥ ºÎ¼­Áø°Å¿´´Ù¸é,
+        //ï¿½ï¿½ Å¥ï¿½ê°¡ ï¿½×¸ï¿½ï¿½Ç¿ï¿½ fixï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½Âµï¿½ ï¿½Î¼ï¿½ï¿½ï¿½ï¿½Å¿ï¿½ï¿½Ù¸ï¿½,
         if (transform.parent != null)
         {
             if (transform.parent.GetComponent<Picture>() != null)

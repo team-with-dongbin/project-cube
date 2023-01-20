@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Scriptable/CubeData", fileName = "Cube Data")]
 public class CubeData : ItemData
 {
-    public static Color[] colorList = { Color.red, Color.magenta, Color.yellow, Color.green };
+    public static Color[] colorList = CubeColorUtil.colorList;
 
     [Dropdown("colorList", "ToString()")]
     public Color color;

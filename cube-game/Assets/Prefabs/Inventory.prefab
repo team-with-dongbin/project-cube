@@ -968,7 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryWindow: {fileID: 4370404208200524853}
-  itemSlot: {fileID: 7017371868133973617}
+  itemSlots: {fileID: 7017371868133973617}
   activeInventory: 0
 --- !u!114 &6208842240926289219
 MonoBehaviour:

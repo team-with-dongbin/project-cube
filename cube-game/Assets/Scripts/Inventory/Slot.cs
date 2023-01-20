@@ -49,6 +49,8 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         itemId = 0;
         SetAlpha(0f);
         countText.text = "";
+        itemImage.sprite = null;
+        isEquip = false;
     }
 
     public void SetAlpha(float newAlpha)
@@ -92,6 +94,31 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         DragSlot.instance.SetDragText("");
         DragSlot.instance.transform.position = Vector3.zero;
         DragSlot.instance.SetTransform(Vector3.zero);
+    }
+
+    public bool RemoveItem(GameObject gameObject)
+    {
+        for (int i = 0; i < item.Count; i++)
+        {
+            GameObject go = item[i];
+            if (go == gameObject)
+            {
+                item.RemoveAt(i);
+                break;
+            }
+        }
+
+        if (item.Count == 0)
+        {
+            ClearSlot();
+        }
+
+        return false;
+    }
+
+    private void InitializeSlot()
+    {
+
     }
 
     private void ChangeSlot()

@@ -10,11 +10,11 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject inventoryWindow;
     [SerializeField]
-    private GameObject itemSlot;
+    private GameObject itemSlots;
 
     public static Inventory instance;
     public bool activeInventory = false;
-    private Slot[] slot;
+    private Slot[] slots;
 
     void Awake()
     {
@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        slot = itemSlot.GetComponentsInChildren<Slot>();
+        slots = itemSlots.GetComponentsInChildren<Slot>();
         // inventoryWindow.SetActive(activeInventory);
     }
 
@@ -43,18 +43,45 @@ public class Inventory : MonoBehaviour
 
     public void AcquireItem(GameObject newItem)
     {
-        for (int i = 0; i < slot.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            if (slot[i].AddCount(newItem))
+            if (slots[i].AddCount(newItem))
                 return;
         }
-        for (int i = 0; i < slot.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            if (!slot[i].item.Any())
+            if (!slots[i].item.Any())
             {
-                slot[i].NewSlot(newItem);
+                slots[i].NewSlot(newItem);
                 return;
             }
         }
+    }
+
+    public void RemoveItem(GameObject item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item.Any() && slots[i].RemoveItem(item))
+            {
+                return;
+            }
+        }
+    }
+
+    public GameObject FindAnyCubeByColor(Color color)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.item.Any())
+            {
+                var cube = slot.item[0].GetComponent<Cube>();
+                if (cube && cube.cubeData.color.IsSameRGB(color))
+                {
+                    return slot.item[0];
+                }
+            }
+        }
+        return null;
     }
 }
