@@ -22,7 +22,7 @@ MonoBehaviour:
     health: 0
     attackPower: 0
     defense: 0
-    movementSpeed: 0
+    movementSpeed: 6
   initialHp: 100
   strikeSound: {fileID: 8300000, guid: 9703ee282f0a19348b1b645c715aac53, type: 3}
   destroySound: {fileID: 8300000, guid: 2453695ab9984c445a8068b57289ef0d, type: 3}

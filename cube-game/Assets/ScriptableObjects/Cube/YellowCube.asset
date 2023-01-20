@@ -19,8 +19,8 @@ MonoBehaviour:
   desription: 
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   statusChanging:
-    health: 0
-    attackPower: 6
+    health: 6
+    attackPower: 3
     defense: 0
     movementSpeed: 0
   initialHp: 100
