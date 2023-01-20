@@ -13,7 +13,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Text countText;
 
     public List<GameObject> item;
-    int itemId;
+    public int itemId;
     bool isEquip;
 
     private void Start()
