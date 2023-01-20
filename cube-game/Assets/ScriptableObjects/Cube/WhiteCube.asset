@@ -19,10 +19,10 @@ MonoBehaviour:
   desription: 
   color: {r: 1, g: 1, b: 1, a: 1}
   statusChanging:
-    health: 6
-    attackPower: 0
+    health: 4
+    attackPower: 2
     defense: 0
-    movementSpeed: 0
+    movementSpeed: 2
   initialHp: 100
   strikeSound: {fileID: 8300000, guid: 9703ee282f0a19348b1b645c715aac53, type: 3}
   destroySound: {fileID: 8300000, guid: 2453695ab9984c445a8068b57289ef0d, type: 3}
