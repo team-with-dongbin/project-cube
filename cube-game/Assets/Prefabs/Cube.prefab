@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6713253848875306068}
+  - component: {fileID: 6381466138849679350}
   - component: {fileID: 358567731025222133}
   - component: {fileID: 5629211088533396530}
   - component: {fileID: 6834107997195271808}
@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6785920715383931431}
   - component: {fileID: 1781717419176117739}
   - component: {fileID: 5428477777133605584}
-  - component: {fileID: 1929374516021185144}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Cube
@@ -24,26 +23,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6713253848875306068
-RectTransform:
+--- !u!4 &6381466138849679350
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968355531193105197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 1.45, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 2}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &358567731025222133
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -123,6 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
+  hp: 100
+  cubeData: {fileID: 0}
 --- !u!82 &6785920715383931431
 AudioSource:
   m_ObjectHideFlags: 0
@@ -245,11 +241,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!222 &1929374516021185144
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968355531193105197}
-  m_CullTransparentMesh: 1
