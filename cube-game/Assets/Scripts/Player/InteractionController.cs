@@ -24,7 +24,6 @@ public class InteractionController : MonoBehaviour
         {
             layerMask |= 1 << LayerMask.NameToLayer(layerName);
         }
-        // Debug.Log(layerMask);
     }
 
     void Start()
@@ -49,12 +48,19 @@ public class InteractionController : MonoBehaviour
     {
         if (_target)
         {
+            Debug.Log("Interaction !");
 
-            // Picture.
+            var pictureCube = _target.GetComponent<PictureCube>();
+            if (pictureCube)
+            {
+                var cube = Inventory.instance.FindAnyCubeByColor(pictureCube.color);
+                if (cube)
+                {
+                    Picture.instance.fitCube(pictureCube.gameObject, cube.gameObject);
+                    Inventory.instance.RemoveItem(cube);
+                }
+            }
         }
-        // target에는 Picture Cube가 있고,
-        // 전역에서, picure를 불러오고.
-        // inventory에서 같은 색의 큐브를 불러온다.
     }
 
     void UnsetTarget()
@@ -98,11 +104,19 @@ public class InteractionController : MonoBehaviour
         {
             if (isHighlight)
             {
-                Picture.instance.DrawOutline(_target);
+                var pictureCube = _target.GetComponent<PictureCube>();
+                if (pictureCube)
+                {
+                    pictureCube.DrawOutline();
+                }
             }
             else
             {
-                Picture.instance.EraseOutline(_target);
+                var pictureCube = _target.GetComponent<PictureCube>();
+                if (pictureCube)
+                {
+                    pictureCube.EraseOutline();
+                }
             }
         }
     }
