@@ -18,8 +18,8 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     private void Start()
     {
-        item.Clear();
     }
+
     public bool AddCount(GameObject newItem)
     {
         if (!isEquip && itemId == newItem.GetComponent<Item>().data.id)
@@ -73,7 +73,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         DragSlot.instance.transform.position = eventData.position;
         DragSlot.instance.SetTransform(eventData.position);
     }
-    
+
     public void OnDrag(PointerEventData eventData)
     {
         DragSlot.instance.transform.position = eventData.position;
@@ -109,7 +109,8 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
                 DragSlot.instance.dragSlot.NewSlot(itemTemp[0]);
                 DragSlot.instance.dragSlot.item = itemTemp.ToList();
                 DragSlot.instance.dragSlot.countText.text = itemTemp.Count.ToString();
-            } else
+            }
+            else
                 DragSlot.instance.dragSlot.ClearSlot();
         }
     }
