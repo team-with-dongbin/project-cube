@@ -10,7 +10,7 @@ public class ItemDictionary : MonoBehaviour
 
     // Dictionary
     Dictionary<string, ItemData> dataByName = new Dictionary<string, ItemData>();
-    Dictionary<int, ItemData> dataById = new Dictionary<int, ItemData>();
+    public Dictionary<int, ItemData> dataById = new Dictionary<int, ItemData>();
     Dictionary<ItemType, List<ItemData>> dataListByTypes = new Dictionary<ItemType, List<ItemData>>();
 
     public static ItemDictionary instance;

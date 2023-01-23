@@ -20,7 +20,6 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     public bool activeInventory = false;
     private Slot[] slots;
-    //private Slot[] CombSlot;
 
     void Awake()
     {
@@ -30,7 +29,6 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slots = itemSlots.GetComponentsInChildren<Slot>();
-        //CombSlot = CombinationSlot.GetComponentsInChildren<Slot>();
         // inventoryWindow.SetActive(activeInventory);
     }
 
@@ -49,23 +47,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public Dictionary<int, int> GetIngredients()
+    {
+        Dictionary<int, int> ingredients = new();
+        foreach (Slot s in CombinationSlots.GetComponentsInChildren<Slot>())
+            if (s.item.Any()) ingredients.Add(s.itemId, s.item.Count);
+        return ingredients;
+    }
     void Combination()
     {
-        List<Slot> ingredients = new();
-
-        foreach (Slot s in CombinationSlots.GetComponentsInChildren<Slot>())
-        //foreach (Slot s in CombSlot)
-        {
-            if (s.item.Any()) ingredients.Add(s);
-        }
-        //조합슬롯에 올라간 아이템들을, itemId 순으로 정렬.
-        ingredients.Sort((a, b) =>
-        {
-            if (a.itemId > b.itemId) return -1;
-            else if (a.itemId == b.itemId) return 0;
-            else return 1;
-        }
-        );
+        GameObject result = CombinationDictionary.instance.TryCombination(GetIngredients());
+        if (result != null) CombinationResultSlot = result;
     }
 
     public void AcquireItem(GameObject newItem)
