@@ -17,14 +17,21 @@ public class Cube : Item, IDamageable
         }
     }
 
+    public override void InitializeData(ItemData itemData)
+    {
+        data = itemData;
+        cubeData = itemData as CubeData;
+        GetComponent<Renderer>().material.SetColor("_Color", cubeData.color);
+    }
+
     void Start()
     {
         if (data == null)
         {
             data = ItemDictionary.instance.GetRandomDataOfType(ItemType.Cube);
         }
-        cubeData = data as CubeData;
-        GetComponent<Renderer>().material.SetColor("_Color", cubeData.color);
+
+        InitializeData(data);
         audioSource = GetComponent<AudioSource>();
     }
 

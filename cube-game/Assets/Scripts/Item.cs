@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     protected bool dropped = false;
-    public ItemData data;
+    [field: SerializeField]
+    public ItemData data { get; protected set; }
     protected SphereCollider sphereCollider;
 
     private void Awake()
@@ -19,6 +20,9 @@ public class Item : MonoBehaviour
         if (dropped)
             transform.Rotate(Vector3.up * 100 * Time.deltaTime);
     }
+
+    // data = itemData와 함께 시작해야 함.
+    public abstract void InitializeData(ItemData itemData);
 
     public virtual void Drop()
     {
