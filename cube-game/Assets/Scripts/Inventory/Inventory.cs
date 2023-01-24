@@ -20,7 +20,6 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     public bool activeInventory = false;
     private Slot[] slots;
-    //private Slot[] CombSlot;
 
     void Awake()
     {
@@ -30,14 +29,15 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slots = itemSlots.GetComponentsInChildren<Slot>();
-        //CombSlot = CombinationSlot.GetComponentsInChildren<Slot>();
+        //CombinationDictionary에서 대입하면, serialized되기도 전에 대입이 시도돼서 not set to instance 오류남.
+        CombinationDictionary.instance.combinationResultSlot = CombinationResultSlot.GetComponentInChildren<Slot>();
         // inventoryWindow.SetActive(activeInventory);
     }
 
     void Update()
     {
         WindowControl();
-        Combination();
+        CombinationDictionary.instance.TryCombination(GetIngredients());
     }
 
     void WindowControl()
@@ -49,23 +49,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void Combination()
+    public Dictionary<int, int> GetIngredients()
     {
-        List<Slot> ingredients = new();
-
+        Dictionary<int, int> ingredients = new();
         foreach (Slot s in CombinationSlots.GetComponentsInChildren<Slot>())
-        //foreach (Slot s in CombSlot)
-        {
-            if (s.item.Any()) ingredients.Add(s);
-        }
-        //조합슬롯에 올라간 아이템들을, itemId 순으로 정렬.
-        ingredients.Sort((a, b) =>
-        {
-            if (a.itemId > b.itemId) return -1;
-            else if (a.itemId == b.itemId) return 0;
-            else return 1;
-        }
-        );
+            if (s.item.Any()) ingredients.Add(s.itemId, s.item.Count);
+        return ingredients;
     }
 
     public void AcquireItem(GameObject newItem)

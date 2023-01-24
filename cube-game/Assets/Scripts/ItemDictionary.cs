@@ -63,7 +63,7 @@ public class ItemDictionary : MonoBehaviour
 
     public GameObject InstantiateWithData(GameObject go, ItemData data)
     {
-        var newGo = Instantiate(gameObject);
+        var newGo = Instantiate(go);
         newGo.GetComponent<Item>().data = data;
         return newGo;
     }
