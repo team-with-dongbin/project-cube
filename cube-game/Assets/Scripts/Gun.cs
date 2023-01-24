@@ -22,13 +22,22 @@ public class Gun : Weapon, IReloadable
         // 사용할 컴포넌트의 참조 가져오기
     }
 
-    private void Start()
+    public override void InitializeData(ItemData itemData)
     {
-        _gunData = data as GunData;
-        lastFireTime = 0;
+        data = itemData;
+        _gunData = itemData as GunData;
         ammoRemain = _gunData.initialAmmoRemain;
         magAmmo = _gunData.magCapacity;
+    }
 
+    private void Start()
+    {
+        if (data)
+        {
+            InitializeData(data);
+        }
+
+        lastFireTime = 0;
         state = State.Ready;
         cameraTransform = Utils.GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();

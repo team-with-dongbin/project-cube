@@ -12,13 +12,26 @@ public class Knife : Weapon
     private Transform cameraTransform;
     private KnifeData _knifeData;
 
+    public override void InitializeData(ItemData itemData)
+    {
+        data = itemData;
+        _knifeData = data as KnifeData;
+        _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height + 1.0f;
+    }
+
     private void Start()
     {
-        _knifeData = data as KnifeData;
+        if (data)
+        {
+            Debug.Log("Hello");
+            InitializeData(data);
+        }
+
+        Debug.Log("Wow");
+
         state = State.Idle;
         cameraTransform = Utils.GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();
-        _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height + 1.0f;
     }
 
     protected override void Update()
