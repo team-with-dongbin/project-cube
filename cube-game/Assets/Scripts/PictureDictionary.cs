@@ -8,7 +8,7 @@ public class PictureDictionary : MonoBehaviour
 {
     public static PictureDictionary instance;
     Dictionary<char,Color> manufacture= new Dictionary<char,Color>();
-    public List<Color[,]> pictureDatas = new List<Color[,]>();
+    List<Color[,]> pictureDatas = new List<Color[,]>();
     void Awake()
     {
         instance = this;
@@ -40,5 +40,10 @@ public class PictureDictionary : MonoBehaviour
                 pictureDatas.Add(picture);
             }
         }
+    }
+
+    public List<Color[,]> GetPictureDatas()
+    {
+        return pictureDatas;
     }
 }

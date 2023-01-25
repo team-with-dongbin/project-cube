@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject CombinationSlots;
     [SerializeField]
-    private GameObject CombinationResultSlot;
+    private GameObject combinationResultSlot;
 
     public static Inventory instance;
     public bool activeInventory = false;
@@ -29,15 +29,15 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slots = itemSlots.GetComponentsInChildren<Slot>();
-        //CombinationDictionary에서 대입하면, serialized되기도 전에 대입이 시도돼서 not set to instance 오류남.
-        CombinationDictionary.instance.combinationResultSlot = CombinationResultSlot.GetComponentInChildren<Slot>();
         // inventoryWindow.SetActive(activeInventory);
     }
 
     void Update()
     {
         WindowControl();
-        CombinationDictionary.instance.TryCombination(GetIngredients());
+        //왜 이 if문이 있어야 동작하지..?
+        if(CombinationResultSlot.instance!=null)
+        CombinationResultSlot.instance.TryCombination(GetIngredients());
     }
 
     void WindowControl()
@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public Dictionary<int, int> GetIngredients()
+    Dictionary<int, int> GetIngredients()
     {
         Dictionary<int, int> ingredients = new();
         foreach (Slot s in CombinationSlots.GetComponentsInChildren<Slot>())
