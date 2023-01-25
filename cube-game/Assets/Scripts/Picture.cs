@@ -18,7 +18,8 @@ public class Picture : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        pictureColors = PictureDictionary.instance.pictureDatas[Random.Range(0, PictureDictionary.instance.pictureDatas.Count)];
+        List<Color[,]> pictureDatas = PictureDictionary.instance.GetPictureDatas();
+        pictureColors = pictureDatas[Random.Range(0, pictureDatas.Count)];
         picture = new GameObject[pictureColors.GetLength(0), pictureColors.GetLength(1)];
         remainPicture = pictureColors.GetLength(0) * pictureColors.GetLength(1);
         //outline = new Material(Shader.Find("Custom/Outline"));
