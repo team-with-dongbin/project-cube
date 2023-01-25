@@ -3,50 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
+using System.IO;
 
 public class CombinationDictionary : MonoBehaviour
 {
     [SerializeField]
     private GameObject Cube;
-
     public static CombinationDictionary instance;
     List<(Dictionary<int, int>, (int, int))> CombinationList = new();
-
     public Slot combinationResultSlot;
 
-    (Dictionary<int, int>, (int, int)) MakeCombination(List<(int,int)> ingredients,(int,int) result)
-    {
-        Dictionary<int, int> combination = new();
-        foreach (var ingredient in ingredients)
-            combination.Add(ingredient.Item1, ingredient.Item2);
-        return (combination,result);
-    }
     private void Awake()
     {
         instance = this;
+        string path = Application.dataPath + "/Resources/CombinationList.txt";
+        string[] combinationList_text = File.ReadAllLines(path);
+        foreach(string s in combinationList_text)
+        {
+            string[] temp = s.Split('=');
+
+            string[] combination_text = temp[0].Split('+');
+            Dictionary<int, int> combination = new();
+            foreach (var i in combination_text)
+            {
+                string[] ingredient_text = i.Split('*');
+                int item_id = int.Parse(ingredient_text[0]), count = int.Parse(ingredient_text[1]);
+                combination.Add(item_id, count);
+            }
+
+            string[] result_text = temp[1].Split('*');
+            (int, int) result = (int.Parse(result_text[0]), int.Parse(result_text[1]));
+
+            CombinationList.Add((combination, result));
+        }
     }
 
     void Start()
     {
-        //pixelArt 만드는 것처럼 외부에서 조합식을 받아와서 가공해서 쓰는게 더 보기 좋을듯.
-        List<(int,int)> ingredients = new();(int, int) result;
-        ingredients.Clear(); ingredients.Add((1001, 1)); ingredients.Add((1002, 1));
-        result = (1004, 2);CombinationList.Add(MakeCombination(ingredients,result));//R+G=Y
-        ingredients.Clear(); ingredients.Add((1001, 1)); ingredients.Add((1003, 1));
-        result = (1005, 2); CombinationList.Add(MakeCombination(ingredients, result));//R+B=M
-        ingredients.Clear(); ingredients.Add((1002, 1)); ingredients.Add((1003, 1));
-        result = (1006, 2); CombinationList.Add(MakeCombination(ingredients, result));//G+B=C
-        ingredients.Clear(); ingredients.Add((1001, 1)); ingredients.Add((1006, 2));
-        result = (1007, 3); CombinationList.Add(MakeCombination(ingredients, result));//R+C=W
-        ingredients.Clear(); ingredients.Add((1002, 1)); ingredients.Add((1005, 2));
-        result = (1007, 3); CombinationList.Add(MakeCombination(ingredients, result));//G+M=W
-        ingredients.Clear(); ingredients.Add((1003, 1)); ingredients.Add((1004, 2));
-        result = (1007, 3); CombinationList.Add(MakeCombination(ingredients, result));//B+Y=W
-        ingredients.Clear(); ingredients.Add((1001, 1)); ingredients.Add((1002, 1)); ingredients.Add((1003, 1));
-        result = (1007, 3); CombinationList.Add(MakeCombination(ingredients, result));//R+G+B=W
-        //start에서 result에 대입해버리면 블록을 조합할 때마다 랜덤이 아니게됨.
-        ingredients.Clear(); ingredients.Add((1000, 3)); result = (Random.Range(1001, 1008), 2);
-        CombinationList.Add(MakeCombination(ingredients, result));//B*3=> ?*2
+
     }
 
     public void TryCombination(Dictionary<int, int> ingredients)
@@ -72,6 +66,8 @@ public class CombinationDictionary : MonoBehaviour
                 break;
             }
         }
+        if (result.Item1 == -1000) result.Item1 = Random.Range(1001, 1008);
+
         if (result.Item1 == -1)
         {
             combinationResultSlot.ClearSlot();
@@ -84,7 +80,6 @@ public class CombinationDictionary : MonoBehaviour
         else if (result.Item1 >= 1000 && result.Item1 <= 1007)
         {
             //id/개수 가지고, 결과물아이템 넣어줘야됨.
-
             //initializeSlot() 함수 구현되면 그걸로 바꿔야함.
             combinationResultSlot.ClearSlot();
             //현재 picture에서 pictureCube 생성하는것 / PlayerController에서 GetItem 호출하는것과 비슷하지만,
