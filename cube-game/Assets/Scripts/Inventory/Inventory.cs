@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject itemSlots;
     [SerializeField]
-    private GameObject CombinationSlots;
+    private GameObject combinationSlots;
     [SerializeField]
     private GameObject combinationResultSlot;
 
@@ -32,12 +32,59 @@ public class Inventory : MonoBehaviour
         // inventoryWindow.SetActive(activeInventory);
     }
 
+    void PutBackItems()
+    {
+        CombinationSlot[] s = combinationSlots.GetComponentsInChildren<CombinationSlot>();
+        for (int i = 0; i < s.Length; i++)
+        {
+            //조합 슬롯에 있는 아이템을 인벤토리 슬롯으로 옮기는 작업.
+            s[i].ClearSlot();
+        }
+    }
+
+    public Dictionary<int, int> GetIngredients(GameObject KindOfSlot)
+    {
+        Dictionary<int, int> ingredients = new();
+        foreach (Slot s in KindOfSlot.GetComponentsInChildren<Slot>())
+            if (s.item.Any()) ingredients.Add(s.itemId, s.item.Count);
+        return ingredients;
+    }
+
+    public void TryCombination(Dictionary<int, int> ingredients)
+    {
+        (int, int) result = (-1, -1);
+        //모든 조합식에 대해 체크.
+        foreach ((Dictionary<int, int> combination, (int, int) output) in CombinationDictionary.instance.GetCombinationList())
+        {
+            bool ok = ingredients.Count == combination.Count;
+            //해당 조합식의 모든 아이템을 정해진 개수 이상 가지고 있는 지 체크.
+            if (!ok) continue;
+            foreach ((int item, int need) in combination)
+            {
+                if (!ingredients.ContainsKey(item) || need > ingredients[item])
+                {
+                    ok = false;
+                    break;
+                }
+            }
+            if (ok)
+            {
+                result = output;
+                break;
+            }
+        }
+        if (result.Item1 == -1000) result.Item1 = UnityEngine.Random.Range(1001, 1008);
+        CombinationResultSlot s = combinationResultSlot.GetComponentInChildren<CombinationResultSlot>();
+        s.printResult(result.Item1, result.Item2);
+    }
+
     void Update()
     {
         WindowControl();
-        //왜 이 if문이 있어야 동작하지..?
-        if(CombinationResultSlot.instance!=null)
-        CombinationResultSlot.instance.TryCombination(GetIngredients());
+        if (activeInventory)
+        {
+            TryCombination(GetIngredients(combinationSlots));
+        }
     }
 
     void WindowControl()
@@ -45,16 +92,12 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             activeInventory = !activeInventory;
+            if (!activeInventory)
+            {
+                PutBackItems();
+            }
             inventoryWindow.SetActive(activeInventory);
         }
-    }
-
-    Dictionary<int, int> GetIngredients()
-    {
-        Dictionary<int, int> ingredients = new();
-        foreach (Slot s in CombinationSlots.GetComponentsInChildren<Slot>())
-            if (s.item.Any()) ingredients.Add(s.itemId, s.item.Count);
-        return ingredients;
     }
 
     public void AcquireItem(GameObject newItem)
