@@ -37,7 +37,8 @@ public class Inventory : MonoBehaviour
         CombinationSlot[] s = combinationSlots.GetComponentsInChildren<CombinationSlot>();
         for (int i = 0; i < s.Length; i++)
         {
-            //조합 슬롯에 있는 아이템을 인벤토리 슬롯으로 옮기는 작업.
+            foreach (GameObject item in s[i].item)
+                AcquireItem(item);
             s[i].ClearSlot();
         }
     }
