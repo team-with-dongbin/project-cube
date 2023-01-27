@@ -125,17 +125,26 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (DragSlot.instance.dragSlot.item.Any())
         {
+            if (DragSlot.instance.dragSlot == this) return;
             List<GameObject> itemTemp = item.ToList();
-
+            int itemTempId = itemId;
             NewSlot(DragSlot.instance.dragSlot.item[0]);
             item = DragSlot.instance.dragSlot.item.ToList();
             countText.text = item.Count.ToString();
-
             if (itemTemp.Any())
             {
-                DragSlot.instance.dragSlot.NewSlot(itemTemp[0]);
-                DragSlot.instance.dragSlot.item = itemTemp.ToList();
-                DragSlot.instance.dragSlot.countText.text = itemTemp.Count.ToString();
+                if (itemTempId == DragSlot.instance.dragSlot.itemId)
+                {
+                    DragSlot.instance.dragSlot.ClearSlot();
+                    item.AddRange(itemTemp);
+                    countText.text = item.Count.ToString();
+                }
+                else
+                {
+                    DragSlot.instance.dragSlot.NewSlot(itemTemp[0]);
+                    DragSlot.instance.dragSlot.item = itemTemp.ToList();
+                    DragSlot.instance.dragSlot.countText.text = itemTemp.Count.ToString();
+                }
             }
             else
                 DragSlot.instance.dragSlot.ClearSlot();
