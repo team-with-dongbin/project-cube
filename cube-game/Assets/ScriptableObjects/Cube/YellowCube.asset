@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1004
   itemName: yellow cube
+  prefab: {fileID: 1968355531193105197, guid: 9028c2f2275eb5a4cab34097dcae9c32, type: 3}
   icon: {fileID: 21300000, guid: 8ae4718699a5a844ca21c546a5e818dd, type: 3}
   itemType: 1
   desription: 
