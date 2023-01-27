@@ -121,7 +121,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     }
 
-    private void ChangeSlot()
+    protected virtual void ChangeSlot()
     {
         if (DragSlot.instance.dragSlot.item.Any())
         {

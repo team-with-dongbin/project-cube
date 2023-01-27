@@ -38,4 +38,8 @@ public class CombinationResultSlot : Slot
             }
         }
     }
+    protected override void ChangeSlot()
+    {
+        return;
+    }
 }
