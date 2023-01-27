@@ -5,7 +5,7 @@ public class ItemData : ScriptableObject
 {
     public int id;
     public string itemName;
-    // public GameObject prefab;
+    public GameObject prefab;
     public Sprite icon;
     public ItemType itemType = ItemType.Default;
 

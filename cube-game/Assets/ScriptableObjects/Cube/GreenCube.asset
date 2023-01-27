@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1002
   itemName: green cube
+  prefab: {fileID: 1968355531193105197, guid: 9028c2f2275eb5a4cab34097dcae9c32, type: 3}
   icon: {fileID: 21300000, guid: cc5bbb1f99d65504d9f229e4e9c44e74, type: 3}
   itemType: 1
   desription: 

@@ -61,10 +61,10 @@ public class ItemDictionary : MonoBehaviour
         return dataById[id];
     }
 
-    public GameObject InstantiateWithData(GameObject go, ItemData data)
+    public GameObject InstantiateWithData(int itemId)
     {
-        var newGo = Instantiate(go);
-        newGo.GetComponent<Item>().InitializeData(data);
+        var newGo = Instantiate(dataById[itemId].prefab);
+        newGo.GetComponent<Item>().InitializeData(dataById[itemId]);
         return newGo;
     }
 }
