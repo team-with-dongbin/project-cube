@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.EventSystems;
 
-public class CombinationResultSlot : Slot
+public class CombinationResultSlot : Slot, IPointerDownHandler
 {
     public static CombinationResultSlot instance;
     CombinationResultSlot combinationResultSlot;
@@ -11,35 +12,34 @@ public class CombinationResultSlot : Slot
     private void Awake()
     {
         instance = this;
-        combinationResultSlot = GetComponents<CombinationResultSlot>()[0];
+        combinationResultSlot = GetComponent<CombinationResultSlot>();
     }
 
-    public void printResult(int itemId, int count)
+    private void Update()
     {
-        if (itemId == -1)
+        printResult(Inventory.instance.TryCombination().Item2);
+    }
+    public void printResult((int itemId,int count) result)
+    {
+        if (result.itemId == -1)
         {
             combinationResultSlot.ClearSlot();
-            return;
-        }
-        else if (combinationResultSlot.item.Any())
-        {
             return;
         }
         else
         {
-            combinationResultSlot.ClearSlot();
-            for (int i = 0; i < count; i++)
-            {
-                GameObject cube = ItemDictionary.instance.InstantiateWithData(itemId);
-                cube.GetComponent<Cube>().Drop();
-                if (i == 0) combinationResultSlot.NewSlot(cube);
-                else combinationResultSlot.AddCount(cube);
-                cube.SetActive(false);
-            }
+            itemImage.sprite = ItemDictionary.instance.FindById(result.itemId).icon;
+            SetAlpha(1f);
+            countText.text = result.count.ToString();
         }
     }
     protected override void ChangeSlot()
     {
         return;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Inventory.instance.DoCombination();
     }
 }
