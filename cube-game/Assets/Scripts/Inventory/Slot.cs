@@ -7,10 +7,11 @@ using System.Linq;
 
 public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    //CombinationResultSlot에서 참조하기 위해 protected로 변경.
     [SerializeField]
-    private Image itemImage;
+    protected Image itemImage;
     [SerializeField]
-    private Text countText;
+    protected Text countText;
 
     public List<GameObject> item;
     public int itemId;
@@ -75,7 +76,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         DragSlot.instance.transform.position = eventData.position;
         DragSlot.instance.SetTransform(eventData.position);
     }
-
+    
     public void OnDrag(PointerEventData eventData)
     {
         DragSlot.instance.transform.position = eventData.position;
@@ -98,22 +99,23 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public bool RemoveItem(GameObject gameObject)
     {
+        bool ok = false;
         for (int i = 0; i < item.Count; i++)
         {
             GameObject go = item[i];
             if (go == gameObject)
             {
                 item.RemoveAt(i);
+                countText.text = item.Count.ToString();
+                ok = true;
                 break;
             }
         }
-
         if (item.Count == 0)
         {
             ClearSlot();
         }
-
-        return false;
+        return ok;
     }
 
     private void InitializeSlot()
