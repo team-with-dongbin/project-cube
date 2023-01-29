@@ -63,7 +63,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     private bool CheckEquip(ItemType itemType)
     {
-        return (itemType == ItemType.Equipment || itemType == ItemType.Gun || itemType == ItemType.Knife);
+        return (itemType == ItemType.Equipment || itemType == ItemType.Weapon);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

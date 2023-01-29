@@ -24,20 +24,15 @@ public class Cube : Item, IDamageable
         GetComponent<Renderer>().material.SetColor("_Color", cubeData.color);
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         if (data == null)
         {
             data = ItemDictionary.instance.GetRandomDataOfType(ItemType.Cube);
         }
-
         InitializeData(data);
         audioSource = GetComponent<AudioSource>();
-    }
-
-    public void OnEnable()
-    {
-        sphereCollider.enabled = false;
     }
 
     public void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
