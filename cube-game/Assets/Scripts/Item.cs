@@ -8,12 +8,6 @@ public abstract class Item : MonoBehaviour
     protected bool dropped = false;
     [field: SerializeField]
     public ItemData data { get; protected set; }
-    protected SphereCollider sphereCollider;
-
-    private void Awake()
-    {
-        sphereCollider = gameObject.GetComponent<SphereCollider>();
-    }
 
     protected virtual void Update()
     {
@@ -24,35 +18,61 @@ public abstract class Item : MonoBehaviour
     // data = itemData와 함께 시작해야 함.
     public abstract void InitializeData(ItemData itemData);
 
+    float correction()
+    {
+        return transform.localScale.magnitude / Mathf.Sqrt(3);
+    }
+    protected virtual void Start()
+    {
+
+    }
+    protected virtual void OnEnable()
+    {
+        float sz = 0;
+        foreach (var mr in transform.GetComponentsInChildren<MeshRenderer>())
+            sz = Mathf.Max(sz, mr.localBounds.size.magnitude) / Mathf.Sqrt(3);
+        transform.localScale /= sz;
+        GetComponent<SphereCollider>().enabled = false;
+        GetComponent<SphereCollider>().radius = 5 / correction();
+    }
+
     public virtual void Drop()
     {
         transform.localScale /= 3;
         transform.rotation = Quaternion.identity;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        sphereCollider.enabled = true;
-        //boxCollider.size /= 1000;
-        boxCollider.center = Vector3.down / 2;
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        if (data.itemType != ItemType.Cube)
+        {
+            boxCollider.enabled = true;
+            boxCollider.size = Vector3.one / 1000;
+            GetComponent<Rigidbody>().useGravity = true;
+            boxCollider.center = Vector3.down / 2 / correction();
+        }
+        GetComponent<SphereCollider>().enabled = true;
         gameObject.layer = LayerMask.NameToLayer("Item");
         gameObject.tag = "Item";
 
         dropped = true;
-        rigidbody.constraints =
+        GetComponent<Rigidbody>().constraints =
             RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ |
             RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
     }
     public virtual void put()
     {
-        transform.localScale *= 3;
+        transform.localScale = Vector3.one;
         transform.rotation = Quaternion.identity;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        sphereCollider.enabled = false;
-        //boxCollider.size /= 1000;
-        boxCollider.center = Vector3.zero;
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        if (data.itemType != ItemType.Cube)
+        {
+            boxCollider.enabled = false;
+            GetComponent<Rigidbody>().useGravity = false;
+            boxCollider.center = Vector3.zero;
+        }
+        GetComponent<SphereCollider>().enabled = false;
+        //아이템 종류에 맞는 레이어로 설정하도록 변경해야함.
         gameObject.layer = LayerMask.NameToLayer("Cube");
         gameObject.tag = "Cube";
         dropped = false;
-        rigidbody.constraints = RigidbodyConstraints.None;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 }
