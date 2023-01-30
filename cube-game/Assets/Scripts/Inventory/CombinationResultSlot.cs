@@ -33,9 +33,10 @@ public class CombinationResultSlot : Slot, IPointerDownHandler
             countText.text = result.count.ToString();
         }
     }
-    protected override void ChangeSlot()
+
+    protected override bool Validate(ItemData itemData)
     {
-        return;
+        return false;
     }
 
     public void OnPointerDown(PointerEventData eventData)

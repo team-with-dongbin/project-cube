@@ -25,18 +25,18 @@ public class Gun : Weapon, IReloadable
     public override void InitializeData(ItemData itemData)
     {
         data = itemData;
-        _gunData = itemData as GunData;
+        _gunData = data as GunData;
         ammoRemain = _gunData.initialAmmoRemain;
         magAmmo = _gunData.magCapacity;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         if (data)
         {
             InitializeData(data);
         }
-
         lastFireTime = 0;
         state = State.Ready;
         cameraTransform = Utils.GetFirstViewCameraTransform();

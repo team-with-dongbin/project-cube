@@ -19,8 +19,9 @@ public class Knife : Weapon
         _knifeData.attackRange = gameObject.GetComponent<CapsuleCollider>().height + 1.0f;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         if (data)
         {
             InitializeData(data);

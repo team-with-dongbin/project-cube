@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fddcbe8209a7f2499cddbeae0a2a83d, type: 3}
   m_Name: KnifeData
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2002
   itemName: base knife
   prefab: {fileID: 4280494283831539393, guid: 8fb51e7ddef96064999948c39f5298e6, type: 3}
   icon: {fileID: 21300000, guid: 0995135a81b91fd4a89dea74e3dae3fd, type: 3}
-  itemType: 3
+  itemType: 2
   desription: 
   damage: 20
+  weaponType: 1
   swingClip: {fileID: 8300000, guid: aff69d3c7cd2ac248849dc30531d112c, type: 3}
   attackRange: 2.415629

@@ -17,6 +17,9 @@ public class Inventory : MonoBehaviour
     private GameObject combinationSlots;
     [SerializeField]
     private GameObject combinationResultSlot;
+    [SerializeField]
+    private GameObject equipmentSlots;
+
 
     public static Inventory instance;
     public bool activeInventory = false;
@@ -35,6 +38,14 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         slots = itemSlots.GetComponentsInChildren<Slot>();
+        GameObject knife = ItemDictionary.instance.InstantiateWithData(2002);
+        knife.GetComponent<Item>().Drop();
+        //knife.SetActive(false);
+        //AcquireItem(knife);
+        GameObject pistol = ItemDictionary.instance.InstantiateWithData(2001);
+        pistol.GetComponent<Item>().Drop();
+        //pistol.SetActive(false);
+        //AcquireItem(pistol);
 
         //테스트용으로 아이템 할당.
         for (int i = 1000; i <= 1007; i++)

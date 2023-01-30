@@ -5,14 +5,14 @@ public enum WeaponType
     NotWeapon,
     Knife,
     Pistol,
+    Default
 }
 
 public enum ItemType
 {
     Equipment,
     Cube,
-    Gun,
-    Knife,
+    Weapon,
     Potion,
     Default
 }
