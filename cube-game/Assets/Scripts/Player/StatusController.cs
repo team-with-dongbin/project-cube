@@ -1,47 +1,77 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StatusController : MonoBehaviour
 {
-    public PlayerStatus nowStatus { get; private set; }
-    public PlayerStatus originalStatus { get; private set; }
+    public static StatusController Instance;
+    // 현재 HP
+    public float Health { get; private set; }
 
+    // 최대 HP, 아무런 버프가 없을 때의 Status
+    public PlayerStatus PlayerNormalStatus
+    {
+        get
+        {
+            return PhysicalStatus + InventoryStatus;
+        }
+    }
+
+    // 사용자가 임의로 올린 Stat이 반영되지 않은 Status
     [field: SerializeField]
-    public PlayerStatus basicStatus { get; private set; }
-    public PlayerStatus inventoryStatus { get; private set; }
+    public PlayerStatus OriginalStauts { get; private set; }
+
+    // 레벨업 등에서 사용자가 임의로 Stat을 올린 것들을 반영한, Player 자체적으로 가지고 있는 Status
+    public PlayerStatus PhysicalStatus { get; private set; }
+
+    // Inventory의 Item에서 statusChanging의 합
+    public PlayerStatus InventoryStatus { get; private set; }
+    public UnityEvent OnPlayerDie = new UnityEvent();
 
     private void Awake()
     {
-        originalStatus = new PlayerStatus(basicStatus);
-        RecoverStatus();
+        Instance = new StatusController();
+        PhysicalStatus = new PlayerStatus(OriginalStauts);
+        InventoryStatus = new PlayerStatus();
+        InitiailizeHP();
     }
 
-    public void RecoverStatus()
+    private void Start()
     {
-        nowStatus = new PlayerStatus(originalStatus);
+        Inventory.instance.OnInventoryStatusChanged.AddListener(SetInventoryStatus);
     }
 
-    public void SetBasicStatus(PlayerStatus basicStatus)
+    public void InitiailizeHP()
     {
-        ApplyStatusDiff(this.basicStatus, basicStatus);
+        Health = PlayerNormalStatus.health;
+    }
 
-        this.basicStatus = basicStatus;
-        this.originalStatus = this.inventoryStatus + this.basicStatus;
+    public void SetPhysicalStatus(PlayerStatus physicalStatus)
+    {
+        Damage(physicalStatus.health - this.PhysicalStatus.health);
+        this.PhysicalStatus = physicalStatus;
     }
 
     public void SetInventoryStatus(PlayerStatus inventoryStatus)
     {
-        ApplyStatusDiff(this.inventoryStatus, inventoryStatus);
-
-        this.inventoryStatus = inventoryStatus;
-        this.originalStatus = this.inventoryStatus + this.basicStatus;
+        Damage(inventoryStatus.health - this.InventoryStatus.health);
+        this.InventoryStatus = inventoryStatus;
     }
 
-    private void ApplyStatusDiff(PlayerStatus before, PlayerStatus after)
+    public void Damage(float diff, bool CanDie = false)
     {
-        var diffOriginalStatus = after - before;
-        nowStatus += diffOriginalStatus;
+        float temp = Health;
+        temp -= diff;
 
-        nowStatus.health = Mathf.Max(nowStatus.health, 1f);
-        nowStatus.movementSpeed = Mathf.Max(nowStatus.movementSpeed, 0f);
+        if (CanDie == false)
+        {
+            temp = Mathf.Max(1f, temp);
+        }
+
+        Health = temp;
+
+        if (Health <= 0f)
+        {
+            OnPlayerDie.Invoke();
+        }
     }
 }

@@ -60,6 +60,12 @@ public class PlayerController : MonoBehaviour
             Rotate();
         }
     }
+
+    float CalculateMovementSpeedRatio()
+    {
+        return ((statusController.PlayerNormalStatus.movementSpeed + 100f) / 100f);
+    }
+
     void Move()
     {
         Vector2 inputVector = moveDirection;
@@ -71,7 +77,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVector = rigidBody.transform.forward * inputVector.y;
         moveVector += Quaternion.Euler(0, 90f, 0f) * rigidBody.transform.forward * inputVector.x;
 
-        rigidBody.MovePosition(rigidBody.position + moveVector * statusController.nowStatus.movementSpeed * Time.deltaTime);
+        rigidBody.MovePosition(rigidBody.position + moveVector * CalculateMovementSpeedRatio() * Time.deltaTime);
         animationController.SetMoveVector(inputVector);
     }
 

@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
@@ -21,9 +22,14 @@ public class Inventory : MonoBehaviour
     public bool activeInventory = false;
     private Slot[] slots;
 
+    public UnityEvent<PlayerStatus> OnInventoryStatusChanged;
+    InventoryStatusHandler _statusHandler;
+
     void Awake()
     {
         instance = this;
+        _statusHandler = gameObject.AddComponent<InventoryStatusHandler>();
+        OnInventoryStatusChanged = _statusHandler.OnInventoryStatusChanged;
     }
 
     void Start()
@@ -40,6 +46,16 @@ public class Inventory : MonoBehaviour
                 AcquireItem(item);
             }
         // inventoryWindow.SetActive(activeInventory);
+    }
+
+    void Update()
+    {
+        WindowControl();
+        if (activeInventory)
+            TryCombination();
+
+        // FixMe(rdd6584) : Do not renew on Update()
+        _statusHandler.RenewInventoryStatus();
     }
 
     void PutBackItems()
@@ -98,18 +114,11 @@ public class Inventory : MonoBehaviour
         foreach ((int itemId, int count) in cur.ingredients)
         {
             //조합슬롯에있는 조합식만큼의 아이템 삭제.
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 RemoveItemInCombinationSlot(itemId);
             }
         }
-    }
-
-    void Update()
-    {
-        WindowControl();
-        if (activeInventory)
-            TryCombination();
     }
 
     void WindowControl()
@@ -158,7 +167,7 @@ public class Inventory : MonoBehaviour
         CombinationSlot[] s = combinationSlots.GetComponentsInChildren<CombinationSlot>();
         for (int i = 0; i < s.Length; i++)
         {
-            if (s[i].item.Any() && s[i].itemId==itemId)
+            if (s[i].item.Any() && s[i].itemId == itemId)
             {
                 s[i].RemoveItem(s[i].item[0]);
                 return;
