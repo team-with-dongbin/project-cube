@@ -40,7 +40,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack()
     {
-        weapon.Attack(statusController.nowStatus.attackPower);
+        weapon.Attack(statusController.PlayerNormalStatus.attackPower);
         animationController.Attack();
     }
 

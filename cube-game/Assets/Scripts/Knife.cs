@@ -26,6 +26,7 @@ public class Knife : Weapon
         {
             InitializeData(data);
         }
+
         state = State.Idle;
         cameraTransform = Utils.GetFirstViewCameraTransform();
         audioSource = GetComponent<AudioSource>();
