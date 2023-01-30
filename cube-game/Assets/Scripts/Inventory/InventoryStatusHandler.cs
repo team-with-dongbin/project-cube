@@ -31,7 +31,12 @@ public class InventoryStatusHandler : MonoBehaviour
                 foreach (var item in slot.item)
                 {
                     var data = item.GetComponent<Item>().data;
-                    result += data.GetField<PlayerStatus>(ItemData.FieldNames.statusChanging);
+                    var value = data.GetField<PlayerStatus>(ItemData.FieldNames.statusChanging);
+
+                    if (value != null)
+                    {
+                        result += value;
+                    }
                 }
             }
         }
