@@ -15,7 +15,7 @@ public class DropdownAttributeDrawer : PropertyDrawer
     public List<Object> SerializedPropertyToList(SerializedProperty property)
     {
         if (!property.isArray) return new List<Object>() { property.objectReferenceValue };
-       // Debug.Log($"property is array, size: {property.arraySize}");
+        // Debug.Log($"property is array, size: {property.arraySize}");
         List<Object> result = new List<Object>();
         for (int i = 0; i < property.arraySize; i++)
         {
@@ -29,7 +29,7 @@ public class DropdownAttributeDrawer : PropertyDrawer
     {
         IList collection = (IList)obj;
         List<Object> result = new List<Object>();
-        foreach(var o in collection)
+        foreach (var o in collection)
         {
             result.Add((Object)o);
         }
@@ -54,7 +54,7 @@ public class DropdownAttributeDrawer : PropertyDrawer
             //Debug.Log($"static class type: {staticClass}");
 
             #region Try field
-            foreach(var field in staticClass.GetFields())
+            foreach (var field in staticClass.GetFields())
             {
                 Debug.Log($"field: {field}");
             }
@@ -164,8 +164,10 @@ public class DropdownAttributeDrawer : PropertyDrawer
                     return i;
                 }
             }
-        }catch(Exception e)
+        }
+        catch (Exception e)
         {
+            Debug.LogError(e);
         }
         return -1;
     }
@@ -180,7 +182,7 @@ public class DropdownAttributeDrawer : PropertyDrawer
     {//CastWholeList(new List<int>(){1, 2, 3}, string)
         IList oldList = (IList)list;
         IList newList = CreateListWithCustomType(itemType);
-        foreach(var item in oldList)
+        foreach (var item in oldList)
         {
             newList.Add(item);
         }
@@ -236,7 +238,7 @@ public class DropdownAttributeDrawer : PropertyDrawer
 
                     int SelectedID = FindSelectedID(UnityObjectList, obj);//Update the selectedID
                     string[] arr = ListToStringArray(UnityObjectList, GetItemName, BaseMaster);//convert the objects into name list using GetItemName delegate method
-                    if(arr == null)
+                    if (arr == null)
                     {//Cannot find property name
                         EditorGUI.LabelField(position, property.name, $"Cannot find property: \"[item].{dropdownAttribute.ItemNameProperty}\"", GetGUIColor(Color.red));
                         return;
@@ -269,7 +271,7 @@ public class DropdownAttributeDrawer : PropertyDrawer
                     int SelectedID = FindSystemObjectSelectedID(SystemObjectList, obj, GetItemName, BaseMaster);//Update the selectedID
                     string[] arr = ListToStringArray(SystemObjectList, GetItemName, BaseMaster);
                     if (SelectedID == -1 && arr.Length > 0) SelectedID = 0;//Set it to 0 as default
-                        int newSelectedID = EditorGUI.Popup(position, property.name, SelectedID, arr, GetDropdownStyle(Color.blue));
+                    int newSelectedID = EditorGUI.Popup(position, property.name, SelectedID, arr, GetDropdownStyle(Color.blue));
                     if (newSelectedID != SelectedID)
                     {//changed
                         SelectedID = newSelectedID;
@@ -287,15 +289,16 @@ public class DropdownAttributeDrawer : PropertyDrawer
             {
                 EditorGUI.LabelField(position, property.name, $"The list \"{dropdownAttribute.ListPath}\" size is 0", GetGUIColor(Color.red));
             }
-        }catch(Exception e)
+        }
+        catch (Exception e)
         {
             GUIStyle style = GetGUIColor(Color.red);
             style.wordWrap = true;//word wrap
 
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label(property.name+" [Dropdown ERROR] ");
-            GUILayout.TextArea(e.ToString(), style , GUILayout.ExpandHeight(true));
+            GUILayout.Label(property.name + " [Dropdown ERROR] ");
+            GUILayout.TextArea(e.ToString(), style, GUILayout.ExpandHeight(true));
 
             GUILayout.EndHorizontal();
             Debug.LogException(e);
