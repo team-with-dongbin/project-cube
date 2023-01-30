@@ -24,6 +24,6 @@ public partial class ItemData : ScriptableObject
     private T GetField<T>(string fieldName, BindingFlags bindingAttr = BindingFlags.Public | BindingFlags.Instance)
     {
         var fieldInfo = GetType().GetField(fieldName, bindingAttr);
-        return (T)(fieldInfo.GetValue(this));
+        return (T)(fieldInfo?.GetValue(this));
     }
 }
