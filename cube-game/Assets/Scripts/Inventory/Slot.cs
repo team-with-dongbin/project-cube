@@ -44,7 +44,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             countText.text = item.Count.ToString();
     }
 
-    public void ClearSlot()
+    public virtual void ClearSlot()
     {
         item.Clear();
         itemId = 0;
@@ -123,33 +123,38 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     }
 
-    protected virtual void ChangeSlot()
+    protected virtual bool Validate(ItemData itemData)
     {
-        if (DragSlot.instance.dragSlot.item.Any())
+        return true;
+    }
+
+    private void ChangeSlot()
+    {
+        if (DragSlot.instance.dragSlot == this) return;
+        if (!Validate(DragSlot.instance.dragSlot.item[0].GetComponent<Item>().data)) { return; }
+        if (item.Any() && !DragSlot.instance.dragSlot.Validate(item[0].GetComponent<Item>().data)) { return; }
+
+        List<GameObject> itemTemp = item.ToList();
+        int itemTempId = itemId;
+        NewSlot(DragSlot.instance.dragSlot.item[0]);
+        item = DragSlot.instance.dragSlot.item.ToList();
+        countText.text = item.Count.ToString();
+        if (itemTemp.Any())
         {
-            if (DragSlot.instance.dragSlot == this) return;
-            List<GameObject> itemTemp = item.ToList();
-            int itemTempId = itemId;
-            NewSlot(DragSlot.instance.dragSlot.item[0]);
-            item = DragSlot.instance.dragSlot.item.ToList();
-            countText.text = item.Count.ToString();
-            if (itemTemp.Any())
+            if (itemTempId == DragSlot.instance.dragSlot.itemId && !isEquip)
             {
-                if (itemTempId == DragSlot.instance.dragSlot.itemId)
-                {
-                    DragSlot.instance.dragSlot.ClearSlot();
-                    item.AddRange(itemTemp);
-                    countText.text = item.Count.ToString();
-                }
-                else
-                {
-                    DragSlot.instance.dragSlot.NewSlot(itemTemp[0]);
-                    DragSlot.instance.dragSlot.item = itemTemp.ToList();
-                    DragSlot.instance.dragSlot.countText.text = itemTemp.Count.ToString();
-                }
+                DragSlot.instance.dragSlot.ClearSlot();
+                item.AddRange(itemTemp);
+                countText.text = item.Count.ToString();
             }
             else
-                DragSlot.instance.dragSlot.ClearSlot();
+            {
+                DragSlot.instance.dragSlot.NewSlot(itemTemp[0]);
+                DragSlot.instance.dragSlot.item = itemTemp.ToList();
+                DragSlot.instance.dragSlot.countText.text = itemTemp.Count.ToString();
+            }
         }
+        else
+            DragSlot.instance.dragSlot.ClearSlot();
     }
 }
