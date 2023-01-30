@@ -23,11 +23,8 @@ public class Knife : Weapon
     {
         if (data)
         {
-            Debug.Log("Hello");
             InitializeData(data);
         }
-
-        Debug.Log("Wow");
 
         state = State.Idle;
         cameraTransform = Utils.GetFirstViewCameraTransform();
