@@ -73,7 +73,7 @@ public class Picture : MonoBehaviour
         cube.transform.localScale = pictureCube.transform.localScale;
         cube.transform.position = pictureCube.transform.position;
         cube.transform.rotation = pictureCube.transform.rotation;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         cube.GetComponent<Cube>().hp = cube.GetComponent<Cube>().cubeData.initialHp * 5;
         cube.SetActive(true);
         remainPicture--;
@@ -85,7 +85,7 @@ public class Picture : MonoBehaviour
         cube.SetActive(false);
         cube.transform.localScale = Vector3.one;
         cube.transform.parent = null;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         cube_coordinates.Remove(cube);
         cube.SetActive(true);
         remainPicture++;
