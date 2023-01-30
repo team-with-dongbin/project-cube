@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(SphereCollider), typeof(BoxCollider), typeof(Rigidbody))]
 public abstract class Item : MonoBehaviour
 {
     protected bool dropped = false;

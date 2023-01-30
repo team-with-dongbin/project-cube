@@ -9,19 +9,33 @@ public class EquipmentSlot : Slot
 {
     [SerializeField]
     private EquipmentType equipmentType;
+    [SerializeField]
+    private Sprite defaultSprite;
     void Start()
     {
         
     }
 
-    protected override void ChangeSlot()
+    private void OnEnable()
     {
-        Slot dragSlot = DragSlot.instance.dragSlot;
-        if (!dragSlot.item.Any()) return;
-        //WeaponSlot 보고 똑같이 고쳐야됨.
-        EquipmentData equipmentData = dragSlot.item[0].GetComponent<EquipmentData>();
-        if (equipmentData != null && equipmentData.equipmentType == equipmentType)
-            base.ChangeSlot();
+        itemImage.sprite = defaultSprite;
+        SetAlpha(1f);
+    }
+
+    public override void ClearSlot()
+    {
+        base.ClearSlot();
+        itemImage.sprite = defaultSprite;
+        SetAlpha(1f);
+    }
+
+    protected override bool Validate(ItemData itemData)
+    {
+        if ((itemData as EquipmentData)?.equipmentType != equipmentType)
+            return false;
+        if ((DragSlot.instance.dragSlot.item[0]?.GetComponent<Item>().data as EquipmentData)?.equipmentType != equipmentType)
+            return false;
+        return true;
     }
 
     // Update is called once per frame
