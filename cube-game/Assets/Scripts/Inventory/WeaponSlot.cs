@@ -17,8 +17,11 @@ public class WeaponSlot : Slot
 
     private void OnEnable()
     {
-        itemImage.sprite = defaultSprite;
-        SetAlpha(1f);
+        if (!item.Any())
+        {
+            itemImage.sprite = defaultSprite;
+            SetAlpha(1f);
+        }
     }
 
     protected override bool Validate(ItemData itemData)
