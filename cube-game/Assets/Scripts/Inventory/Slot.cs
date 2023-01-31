@@ -15,7 +15,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public List<GameObject> item;
     public int itemId;
-    bool isEquip;
+    public bool isEquip;
 
     private void Start()
     {

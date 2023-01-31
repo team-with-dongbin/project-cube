@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
     [SerializeField]
     Rigidbody rigidBody;
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Instance = this;
     }
 
     void Start()

@@ -23,18 +23,23 @@ public abstract class Item : MonoBehaviour
     {
         return transform.localScale.magnitude / Mathf.Sqrt(3);
     }
+    protected virtual void Awake()
+    {
+        float sz = 0;
+        foreach (var mr in transform.GetComponentsInChildren<MeshRenderer>())
+            sz = Mathf.Max(sz, mr.localBounds.size.magnitude) / Mathf.Sqrt(3);
+        transform.localScale /= sz;
+        //OnEnable에 있으면 아이템이 drop될때 자동으로 꺼져서 안됨.
+        GetComponent<SphereCollider>().enabled = false;
+        GetComponent<SphereCollider>().radius = 5 / correction();
+    }
+
     protected virtual void Start()
     {
 
     }
     protected virtual void OnEnable()
     {
-        float sz = 0;
-        foreach (var mr in transform.GetComponentsInChildren<MeshRenderer>())
-            sz = Mathf.Max(sz, mr.localBounds.size.magnitude) / Mathf.Sqrt(3);
-        transform.localScale /= sz;
-        GetComponent<SphereCollider>().enabled = false;
-        GetComponent<SphereCollider>().radius = 5 / correction();
     }
 
     public virtual void Drop()

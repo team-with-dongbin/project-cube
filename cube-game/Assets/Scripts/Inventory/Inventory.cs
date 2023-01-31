@@ -37,9 +37,13 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        StatusController.Instance.OnPlayerDie.AddListener(SpreadItems);
         slots = itemSlots.GetComponentsInChildren<Slot>();
         GameObject knife = ItemDictionary.instance.InstantiateWithData(2002);
         knife.GetComponent<Item>().Drop();
+        slots = itemSlots.GetComponentsInChildren<Slot>();
+        GameObject knife2 = ItemDictionary.instance.InstantiateWithData(2002);
+        knife2.GetComponent<Item>().Drop();
         //knife.SetActive(false);
         //AcquireItem(knife);
         GameObject pistol = ItemDictionary.instance.InstantiateWithData(2001);
@@ -57,6 +61,9 @@ public class Inventory : MonoBehaviour
                 AcquireItem(item);
             }
         // inventoryWindow.SetActive(activeInventory);
+
+        //테스트용으로 캐릭터 죽이기.
+        StatusController.Instance.Damage(10000,true);
     }
 
     void Update()
@@ -77,6 +84,39 @@ public class Inventory : MonoBehaviour
             foreach (GameObject item in s[i].item)
                 AcquireItem(item);
             s[i].ClearSlot();
+        }
+    }
+
+
+    public void SpreadItems()
+    {
+        //아이템 뿌리는 기능 구현.
+        PutBackItems();
+        Dictionary<int, int> drop = new();
+        float spreadRange = 0;
+        foreach(Slot s in slots)
+        {
+            if (s.isEquip) continue;
+            if (drop.ContainsKey(s.itemId)) drop[s.itemId] += s.item.Count;
+            else drop.Add(s.itemId, s.item.Count);
+            //아이템이 많을수록 넓게 아이템이 퍼지도록.
+            spreadRange += s.item.Count;
+        }
+        //적당한 거리로 조정.
+        spreadRange = MathF.Sqrt(spreadRange);
+        foreach ((int itemId, int count) in drop)
+        {
+            for(int i = 0; i < count / 2; i++)
+            {
+                GameObject droppedItem = RemoveItem(itemSlots, itemId);
+                if (droppedItem != null)
+                {
+                    Vector3 random = new Vector3(UnityEngine.Random.Range(-spreadRange, spreadRange), UnityEngine.Random.Range(-spreadRange, spreadRange), UnityEngine.Random.Range(-spreadRange, spreadRange));
+                    random += Vector3.up * 5;
+                    droppedItem.transform.position = PlayerController.Instance.transform.position + random;
+                    droppedItem.SetActive(true);
+                }
+            }
         }
     }
 
@@ -127,7 +167,8 @@ public class Inventory : MonoBehaviour
             //조합슬롯에있는 조합식만큼의 아이템 삭제.
             for (int i = 0; i < count; i++)
             {
-                RemoveItemInCombinationSlot(itemId);
+                //나중에 고유아이템을 강화하는 기능을 만들거라면 GameObject를 인자로 받도록 변경해야함.
+                RemoveItem(combinationSlots, itemId);
             }
         }
     }
@@ -173,17 +214,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItemInCombinationSlot(int itemId)
+    public GameObject RemoveItem(GameObject KindOfSlot, int itemId)
     {
-        CombinationSlot[] s = combinationSlots.GetComponentsInChildren<CombinationSlot>();
+        Slot[] s = KindOfSlot.GetComponentsInChildren<Slot>();
         for (int i = 0; i < s.Length; i++)
         {
             if (s[i].item.Any() && s[i].itemId == itemId)
             {
-                s[i].RemoveItem(s[i].item[0]);
-                return;
+                GameObject go = s[i].item[0];
+                s[i].RemoveItem(go);
+                return go;
             }
         }
+        return null;
     }
 
     public GameObject FindAnyCubeByColor(Color color)
