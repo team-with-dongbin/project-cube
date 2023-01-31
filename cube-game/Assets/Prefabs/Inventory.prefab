@@ -841,6 +841,9 @@ MonoBehaviour:
   combinationResultSlot: {fileID: 8746304028634702350}
   equipmentSlots: {fileID: 1731771022247626297}
   activeInventory: 0
+  OnInventoryStatusChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6208842240926289219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,6 +1326,7 @@ MonoBehaviour:
   countText: {fileID: 5468618078311708712}
   item: []
   itemId: 0
+  isEquip: 0
   equipmentType: 0
   defaultSprite: {fileID: 21300000, guid: ba6a85ae02c94f04f92e7ca6dd0e6528, type: 3}
 --- !u!114 &5468618078311708712 stripped
@@ -1471,6 +1475,7 @@ MonoBehaviour:
   countText: {fileID: 5420543564731349439}
   item: []
   itemId: 0
+  isEquip: 0
 --- !u!114 &5420543564731349439 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5615514745009614345, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
@@ -2331,6 +2336,7 @@ MonoBehaviour:
   countText: {fileID: 6248920491040278213}
   item: []
   itemId: 0
+  isEquip: 0
 --- !u!114 &6248920491040278213 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5615514745009614345, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
@@ -2676,6 +2682,7 @@ MonoBehaviour:
   countText: {fileID: 7525845348890650865}
   item: []
   itemId: 0
+  isEquip: 0
 --- !u!224 &4305302465316226918 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2171013574920143262, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
@@ -2924,6 +2931,7 @@ MonoBehaviour:
   countText: {fileID: 7455839584726159962}
   item: []
   itemId: 0
+  isEquip: 0
 --- !u!224 &3798464309118942669 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2171013574920143262, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
@@ -3580,6 +3588,7 @@ MonoBehaviour:
   countText: {fileID: 8755589189428162523}
   item: []
   itemId: 0
+  isEquip: 0
 --- !u!224 &3048009277944037452 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2171013574920143262, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
@@ -3726,6 +3735,7 @@ MonoBehaviour:
   countText: {fileID: 8919310381776048964}
   item: []
   itemId: 0
+  isEquip: 0
   weaponType: 1
   defaultSprite: {fileID: 21300000, guid: 6327f073eb803ab4988385721e1b4dfd, type: 3}
 --- !u!224 &2884956031125404883 stripped
@@ -4309,8 +4319,9 @@ MonoBehaviour:
   countText: {fileID: 1578693598375348972}
   item: []
   itemId: 0
+  isEquip: 0
   equipmentType: 1
-  defaultSprite: {fileID: 21300000, guid: 83ccc7ceae2b5b04489f958b14203c9e, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 86b3d8ea6be00d24d8904ef6a18bc784, type: 3}
 --- !u!1001 &6411856893414577176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4457,6 +4468,7 @@ MonoBehaviour:
   countText: {fileID: 1519170163652016657}
   item: []
   itemId: 0
+  isEquip: 0
   equipmentType: 2
   defaultSprite: {fileID: 21300000, guid: 22ff2162278652a419a714db95a985d0, type: 3}
 --- !u!1001 &6425541055876481771
@@ -4809,6 +4821,7 @@ MonoBehaviour:
   countText: {fileID: 1657226646542925719}
   item: []
   itemId: 0
+  isEquip: 0
   equipmentType: 3
   defaultSprite: {fileID: 21300000, guid: 8e6d56ed099ea5043b2fca92dd15fab1, type: 3}
 --- !u!1001 &6692670325541788788
@@ -4957,6 +4970,7 @@ MonoBehaviour:
   countText: {fileID: 1229329708046578301}
   item: []
   itemId: 0
+  isEquip: 0
   weaponType: 2
   defaultSprite: {fileID: 21300000, guid: 47399ebbaf43aa44fa2c1ca03da89793, type: 3}
 --- !u!1001 &7186349055021437938
