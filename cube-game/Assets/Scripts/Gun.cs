@@ -17,9 +17,9 @@ public class Gun : Weapon, IReloadable
 
     private float lastFireTime; // 총을 마지막으로 발사한 시점
 
-    private void Awake()
+    protected override void Awake()
     {
-        // 사용할 컴포넌트의 참조 가져오기
+        base.Awake();
     }
 
     public override void InitializeData(ItemData itemData)
