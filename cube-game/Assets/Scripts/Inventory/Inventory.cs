@@ -181,6 +181,7 @@ public class Inventory : MonoBehaviour
             if (!activeInventory)
             {
                 PutBackItems();
+                DragSlot.instance.SetAlpha(0);
             }
             inventoryWindow.SetActive(activeInventory);
         }
