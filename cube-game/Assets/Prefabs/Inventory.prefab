@@ -32,7 +32,7 @@ RectTransform:
   m_Children:
   - {fileID: 433811096655088902}
   m_Father: {fileID: 7436708982151341834}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -113,7 +113,7 @@ RectTransform:
   - {fileID: 3798464309118942669}
   - {fileID: 393517017932704082}
   m_Father: {fileID: 7436708982151341834}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -218,7 +218,7 @@ RectTransform:
   - {fileID: 5105815922098509190}
   - {fileID: 4985778813635792896}
   m_Father: {fileID: 7436708982151341834}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -321,7 +321,7 @@ RectTransform:
   - {fileID: 2884956031125404883}
   - {fileID: 4810364933531098602}
   m_Father: {fileID: 7436708982151341834}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -422,7 +422,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7436708982151341834}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -517,7 +517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: 224.99998}
+  m_AnchoredPosition: {x: -700, y: 225}
   m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &625060913796741229
@@ -591,9 +591,9 @@ RectTransform:
   m_Father: {fileID: 444357369657180985}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -80, y: 15}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -10, y: -25}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &748604276681526684
@@ -625,13 +625,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -670,13 +670,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3923808880447261483}
-  - {fileID: 522276343190812516}
   - {fileID: 884368370757958206}
+  - {fileID: 522276343190812516}
   - {fileID: 5598277221733946038}
-  - {fileID: 444357369657180985}
   - {fileID: 5573049804409415833}
   - {fileID: 1206331146900518316}
   - {fileID: 1341854904692222040}
+  - {fileID: 444357369657180985}
   m_Father: {fileID: 8627329457297842039}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -841,6 +841,9 @@ MonoBehaviour:
   combinationResultSlot: {fileID: 8746304028634702350}
   equipmentSlots: {fileID: 1731771022247626297}
   activeInventory: 0
+  OnInventoryStatusChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6208842240926289219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1028,7 +1031,7 @@ RectTransform:
   m_Children:
   - {fileID: 1798922070818149928}
   m_Father: {fileID: 7436708982151341834}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -3727,7 +3730,7 @@ MonoBehaviour:
   item: []
   itemId: 0
   weaponType: 1
-  defaultSprite: {fileID: 21300000, guid: 6327f073eb803ab4988385721e1b4dfd, type: 3}
+  defaultSprite: {fileID: 21300000, guid: f993703f507cef74fb0c334794537246, type: 3}
 --- !u!224 &2884956031125404883 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2171013574920143262, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
@@ -4310,7 +4313,7 @@ MonoBehaviour:
   item: []
   itemId: 0
   equipmentType: 1
-  defaultSprite: {fileID: 21300000, guid: 83ccc7ceae2b5b04489f958b14203c9e, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 60c13eea84b775a4797d7ab594ec3311, type: 3}
 --- !u!1001 &6411856893414577176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4458,7 +4461,7 @@ MonoBehaviour:
   item: []
   itemId: 0
   equipmentType: 2
-  defaultSprite: {fileID: 21300000, guid: 22ff2162278652a419a714db95a985d0, type: 3}
+  defaultSprite: {fileID: 21300000, guid: ff54b2e153f05db429fba34e1966c604, type: 3}
 --- !u!1001 &6425541055876481771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4958,7 +4961,7 @@ MonoBehaviour:
   item: []
   itemId: 0
   weaponType: 2
-  defaultSprite: {fileID: 21300000, guid: 47399ebbaf43aa44fa2c1ca03da89793, type: 3}
+  defaultSprite: {fileID: 21300000, guid: b91583799007d5c4a887dc44d24c728f, type: 3}
 --- !u!1001 &7186349055021437938
 PrefabInstance:
   m_ObjectHideFlags: 0
