@@ -45,22 +45,14 @@ public class Cube : Item, IDamageable
         }
         else
         {
-            audioSource.clip = cubeData.strikeSound;
-            audioSource.Play();
+            audioSource.PlayOneShot(cubeData.strikeSound);
         }
     }
 
     private void Destruction()
     {
-        audioSource.clip = cubeData.destroySound;
-        audioSource.Play();
-        if (transform.parent != null)
-        {
-            if (transform.parent.GetComponent<Picture>() != null)
-            {
-                Picture.instance.restore(gameObject);
-            }
-        }
+        audioSource.PlayOneShot(cubeData.destroySound);
+        transform.parent?.GetComponent<Picture>()?.restore(gameObject);
         Drop();
     }
     protected override void Update()
