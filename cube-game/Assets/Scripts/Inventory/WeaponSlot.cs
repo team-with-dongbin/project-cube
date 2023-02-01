@@ -18,7 +18,6 @@ public class WeaponSlot : Slot
     private void OnEnable()
     {
         itemImage.sprite = defaultSprite;
-        itemImage.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
         SetAlpha(1f);
     }
 

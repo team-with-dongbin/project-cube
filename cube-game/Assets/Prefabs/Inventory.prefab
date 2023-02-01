@@ -3730,7 +3730,7 @@ MonoBehaviour:
   item: []
   itemId: 0
   weaponType: 1
-  defaultSprite: {fileID: 21300000, guid: f993703f507cef74fb0c334794537246, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 6327f073eb803ab4988385721e1b4dfd, type: 3}
 --- !u!224 &2884956031125404883 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2171013574920143262, guid: 81a636e51bc882d43a4b70f280408e56, type: 3}
