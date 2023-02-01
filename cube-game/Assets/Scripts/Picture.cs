@@ -6,7 +6,7 @@ public class Picture : MonoBehaviour
 {
     public static Picture instance;
     [SerializeField]
-    private GameObject Cube;
+    private GameObject _pictureCube;
 
     private Color[,] pictureColors;
     private GameObject[,] picture;
@@ -18,15 +18,16 @@ public class Picture : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        List<Color[,]> pictureDatas = PictureDictionary.instance.GetPictureDatas();
-        pictureColors = pictureDatas[Random.Range(0, pictureDatas.Count)];
-        picture = new GameObject[pictureColors.GetLength(0), pictureColors.GetLength(1)];
-        remainPicture = pictureColors.GetLength(0) * pictureColors.GetLength(1);
         //outline = new Material(Shader.Find("Custom/Outline"));
     }
     // Start is called before the first frame update
     void Start()
     {
+        List<Color[,]> pictureDatas = PictureDictionary.instance.GetPictureDatas();
+        pictureColors = pictureDatas[Random.Range(0, pictureDatas.Count)];
+        picture = new GameObject[pictureColors.GetLength(0), pictureColors.GetLength(1)];
+        remainPicture = pictureColors.GetLength(0) * pictureColors.GetLength(1);
+
         Vector3 picturePos = transform.position;
 
         GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -37,7 +38,7 @@ public class Picture : MonoBehaviour
         for (int i = 0, x = picture.GetLength(0); i < x; i++)
             for (int j = 0, y = picture.GetLength(1); j < y; j++)
             {
-                GameObject pixel = Instantiate(Cube, picturePos + new Vector3(i - x / 2, 1, j - y / 2), Quaternion.identity);
+                GameObject pixel = Instantiate(_pictureCube, picturePos + new Vector3(i - x / 2, 1, j - y / 2), Quaternion.identity);
 
                 picture_coordinates.Add(pixel, (i, j));
                 Color color = pictureColors[i, j];
@@ -82,14 +83,15 @@ public class Picture : MonoBehaviour
     public void restore(GameObject cube)
     {
         var coordinate = cube_coordinates[cube];
+        GameObject pictureCube = picture[coordinate.Item1, coordinate.Item2];
         cube.SetActive(false);
-        cube.transform.localScale = Vector3.one;
+        cube.transform.localScale /= pictureCube.transform.localScale.magnitude * cube.transform.parent.localScale.magnitude / 3.0f;
         cube.transform.parent = null;
         cube.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         cube_coordinates.Remove(cube);
         cube.SetActive(true);
         remainPicture++;
 
-        picture[coordinate.Item1, coordinate.Item2].SetActive(true);
+        pictureCube.SetActive(true);
     }
 }
