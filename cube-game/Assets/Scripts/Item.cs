@@ -38,7 +38,7 @@ public abstract class Item : MonoBehaviour
     {
         float sz = 0;
         foreach (var mr in transform.GetComponentsInChildren<MeshRenderer>())
-            sz = Mathf.Max(sz, mr.localBounds.size.magnitude) / Mathf.Sqrt(3);
+            sz = Mathf.Max(sz, mr.localBounds.size.magnitude / Mathf.Sqrt(3));
         transform.localScale /= sz;
     }
 
